@@ -3,17 +3,23 @@ import { motion } from "framer-motion";
 import { Heart, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useLocation } from "wouter";
 import MobileMenu from "@/components/mobile-menu";
 import CountdownTimer from "@/components/countdown-timer";
 import ConfettiBackground from "@/components/confetti-background";
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [, navigate] = useLocation();
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (sectionId === 'our-story') {
+      navigate('/our-story');
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
     setIsMobileMenuOpen(false);
   };
@@ -92,7 +98,7 @@ export default function Home() {
                 Home
               </button>
               <button 
-                onClick={() => scrollToSection('our-story')}
+                onClick={() => navigate('/our-story')}
                 className="text-[hsl(342,69%,29%)] hover:text-[hsl(342,60%,40%)] font-serif font-medium transition-colors"
               >
                 Our Story
