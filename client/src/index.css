@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(345, 100%, 98%);
+  --foreground: hsl(342, 69%, 29%);
+  --muted: hsl(345, 50%, 95%);
+  --muted-foreground: hsl(342, 30%, 50%);
+  --popover: hsl(345, 100%, 98%);
+  --popover-foreground: hsl(342, 69%, 29%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(342, 69%, 29%);
+  --border: hsl(345, 30%, 85%);
+  --input: hsl(345, 30%, 85%);
+  --primary: hsl(342, 69%, 29%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(345, 50%, 95%);
+  --secondary-foreground: hsl(342, 69%, 29%);
+  --accent: hsl(332, 51%, 70%);
+  --accent-foreground: hsl(342, 69%, 29%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(342, 69%, 29%);
+  --radius: 0.5rem;
+  
+  /* Wedding theme colors */
+  --burgundy: hsl(342, 69%, 29%);
+  --burgundy-light: hsl(342, 60%, 40%);
+  --rose: hsl(332, 51%, 70%);
+  --rose-light: hsl(345, 100%, 98%);
+  --rose-dark: hsl(332, 60%, 50%);
+}
+
+.dark {
+  --background: hsl(342, 20%, 10%);
+  --foreground: hsl(345, 100%, 98%);
+  --muted: hsl(342, 20%, 15%);
+  --muted-foreground: hsl(345, 50%, 70%);
+  --popover: hsl(342, 20%, 10%);
+  --popover-foreground: hsl(345, 100%, 98%);
+  --card: hsl(342, 20%, 10%);
+  --card-foreground: hsl(345, 100%, 98%);
+  --border: hsl(342, 20%, 20%);
+  --input: hsl(342, 20%, 20%);
+  --primary: hsl(332, 51%, 70%);
+  --primary-foreground: hsl(342, 20%, 10%);
+  --secondary: hsl(342, 20%, 15%);
+  --secondary-foreground: hsl(345, 100%, 98%);
+  --accent: hsl(342, 20%, 20%);
+  --accent-foreground: hsl(345, 100%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(332, 51%, 70%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground overflow-x-hidden;
+  }
+
+  .font-script {
+    font-family: 'Dancing Script', cursive;
+  }
+
+  .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    animation: confetti 3s ease-in-out infinite;
+  }
+
+  .stripe-pattern {
+    background: repeating-linear-gradient(
+      90deg,
+      hsl(342, 60%, 40%) 0px,
+      hsl(342, 60%, 40%) 20px,
+      hsl(342, 69%, 29%) 20px,
+      hsl(342, 69%, 29%) 40px
+    );
+    height: 20px;
+  }
+}
+
+@layer utilities {
+  @keyframes confetti {
+    0% { 
+      transform: translateY(-100vh) rotate(0deg); 
+      opacity: 1; 
+    }
+    100% { 
+      transform: translateY(100vh) rotate(720deg); 
+      opacity: 0; 
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+
+  .animate-confetti {
+    animation: confetti 3s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-fadeInUp {
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+}
