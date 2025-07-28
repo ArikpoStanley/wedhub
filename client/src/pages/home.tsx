@@ -16,6 +16,7 @@ export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isActionModalOpen, setIsActionModalOpen] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [isModalDisabled, setIsModalDisabled] = useState(false);
   const [, navigate] = useLocation();
 
   const scrollToSection = (sectionId: string) => {
@@ -395,16 +396,24 @@ export default function Home() {
       <div 
         className="fixed bottom-4 md:bottom-8 lg:bottom-20 left-1/2 transform -translate-x-1/2 z-30 w-full px-4"
         onMouseEnter={() => {
-          if (hoverTimeout) clearTimeout(hoverTimeout);
-          setIsActionModalOpen(true);
+          if (!isModalDisabled && hoverTimeout) clearTimeout(hoverTimeout);
+          if (!isModalDisabled) setIsActionModalOpen(true);
         }}
         onMouseLeave={() => {
-          const timeout = setTimeout(() => setIsActionModalOpen(false), 300);
-          setHoverTimeout(timeout);
+          if (!isModalDisabled) {
+            const timeout = setTimeout(() => setIsActionModalOpen(false), 300);
+            setHoverTimeout(timeout);
+          }
         }}
       >
         {/* Action Bar */}
-        <div className="bg-[hsl(342,69%,29%)] text-white py-2 md:py-3 px-4 md:px-6 rounded-full shadow-lg cursor-pointer max-w-md mx-auto">
+        <div 
+          className="bg-[hsl(342,69%,29%)] text-white py-2 md:py-3 px-4 md:px-6 rounded-full shadow-lg cursor-pointer max-w-md mx-auto"
+          onClick={() => {
+            setIsActionModalOpen(true);
+            setIsModalDisabled(false);
+          }}
+        >
           <div className="flex justify-center space-x-1 md:space-x-2 text-xs md:text-sm">
             <span className="hidden sm:inline">Programme</span>
             <span className="sm:hidden">Prog</span>
@@ -426,6 +435,9 @@ export default function Home() {
           onClose={() => {
             if (hoverTimeout) clearTimeout(hoverTimeout);
             setIsActionModalOpen(false);
+          }}
+          onItemClicked={() => {
+            setIsModalDisabled(true);
           }}
         />
       </div>
