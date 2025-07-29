@@ -62,7 +62,7 @@ export default function Gallery() {
       <div className="container mx-auto px-4 py-12">
         {/* Hero Section */}
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-16 relative"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -71,30 +71,28 @@ export default function Gallery() {
             Gallery
           </h1>
 
-          {/* Decorative elements */}
-          <div className="flex justify-center items-center space-x-8 mb-12">
-            <motion.div 
-              className="w-16 h-16 flex items-center justify-center"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            >
-              ❤️
-            </motion.div>
-            <motion.div 
-              className="w-16 h-16 flex items-center justify-center"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            >
-              🌸
-            </motion.div>
-            <motion.div 
-              className="w-16 h-16 flex items-center justify-center"
-              animate={{ rotate: -360 }}
-              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            >
-              ❤️
-            </motion.div>
-          </div>
+          {/* Decorative elements positioned absolutely on the text */}
+          <motion.div 
+            className="absolute -top-4 -left-8 w-16 h-16 flex items-center justify-center"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          >
+            ❤️
+          </motion.div>
+          <motion.div 
+            className="absolute top-1/2 right-1/4 w-16 h-16 flex items-center justify-center transform -translate-y-1/2"
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            🌸
+          </motion.div>
+          <motion.div 
+            className="absolute -bottom-4 -right-8 w-16 h-16 flex items-center justify-center"
+            animate={{ rotate: -360 }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          >
+            ❤️
+          </motion.div>
         </motion.div>
 
         {/* Gallery Grid */}

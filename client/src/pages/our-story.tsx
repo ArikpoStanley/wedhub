@@ -86,9 +86,6 @@ export default function OurStory() {
             Celebrating love in its purest form
           </p>
           <h1 className="text-5xl md:text-7xl font-serif mb-8">
-            <span className="text-[hsl(342,69%,29%)]">FROM LINKEDIN CONNECTION</span>
-            <br />
-            <span className="text-[hsl(332,51%,70%)]">TO CONVICTION</span>
           </h1>
 
           {/* Gallery Grid */}
