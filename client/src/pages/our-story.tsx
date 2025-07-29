@@ -67,6 +67,8 @@ export default function OurStory() {
     }
   ];
 
+  const cardColors = ["bg-pink-200", "bg-pink-100", "bg-rose-100", "bg-rose-200"];
+
   return (
     <div className="min-h-screen bg-rose-50 relative">
       <ConfettiBackground />
@@ -130,7 +132,7 @@ export default function OurStory() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="p-8 bg-white/80 backdrop-blur-sm border-0 shadow-lg">
+              <Card className={`p-8 ${cardColors[index % cardColors.length]} backdrop-blur-sm border-0 shadow-lg`}>
                 <h3 className="text-2xl md:text-3xl font-serif text-[hsl(342,69%,29%)] mb-6 text-center">
                   {item.question}
                 </h3>
