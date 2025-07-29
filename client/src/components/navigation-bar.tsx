@@ -105,10 +105,6 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
                   </div>
                 </div>
                 {/* Decorative flowers around the logo */}
-                <div className="absolute -top-1 -left-1 text-[hsl(332,51%,70%)] text-xs">🌸</div>
-                <div className="absolute -top-1 -right-1 text-[hsl(332,51%,70%)] text-xs">🌸</div>
-                <div className="absolute -bottom-1 -left-1 text-[hsl(332,51%,70%)] text-xs">🌸</div>
-                <div className="absolute -bottom-1 -right-1 text-[hsl(332,51%,70%)] text-xs">🌸</div>
               </div>
             </div>
 
