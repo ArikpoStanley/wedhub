@@ -350,7 +350,7 @@ export default function Home() {
               <div className="absolute inset-0 border-4 border-pink-200 rounded-t-[50%] rounded-b-lg"></div>
               
               {/* Inner div: Creates the curved image container */}
-              <div className="absolute inset-2 bg-amber-50 rounded-t-[40%] rounded-b-md overflow-hidden">
+              <div className="absolute inset-2 bg-amber-50 rounded-t-[50%] rounded-b-md overflow-hidden">
                 <img 
                   src={weddingPhotos[0].src}
                   alt={weddingPhotos[0].alt}
