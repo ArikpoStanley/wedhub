@@ -48,7 +48,7 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
   ];
 
   return (
-    <div className="flex justify-center space-x-8 text-[hsl(342,69%,29%)]">
+    <div className="flex justify-center space-x-8 text-[#800000]">
       {timeUnits.map((unit, index) => (
         <motion.div 
           key={unit.label}

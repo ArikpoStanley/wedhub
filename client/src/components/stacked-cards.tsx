@@ -47,7 +47,7 @@ export default function StackedCards({ cards, className = "" }: StackedCardsProp
           >
             {/* Decorative icon on the left */}
             <div className="flex-shrink-0 mt-4">
-              <div className="w-8 h-8 bg-[hsl(342,69%,29%)] rounded-full flex items-center justify-center">
+              <div className="w-8 h-8 bg-[#800000] rounded-full flex items-center justify-center">
                 <span className="text-white text-sm">❤️</span>
               </div>
             </div>
@@ -60,7 +60,7 @@ export default function StackedCards({ cards, className = "" }: StackedCardsProp
                 ${card.backgroundColor || "bg-white/80"}
               `}
             >
-              <h3 className="text-2xl md:text-3xl font-serif text-[hsl(342,69%,29%)] mb-6 text-center">
+              <h3 className="text-2xl md:text-3xl font-serif text-[#800000] mb-6 text-center">
                 {card.title}
               </h3>
               <div className="text-gray-700 leading-relaxed">

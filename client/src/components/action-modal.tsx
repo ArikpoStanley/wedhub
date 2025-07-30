@@ -70,7 +70,7 @@ export default function ActionModal({ isOpen, onClose, onItemClicked }: ActionMo
         
         {/* Modal Content */}
         <motion.div
-          className="fixed inset-0 flex items-center justify-center z-[100] -translate-y-80"
+          className="fixed inset-0 flex items-center justify-center z-[100] -translate-y-40"
           initial={{ opacity: 0 }}
           animate={{ opacity: isOpen ? 1 : 0 }}
           exit={{ opacity: 0 }}
@@ -91,8 +91,8 @@ export default function ActionModal({ isOpen, onClose, onItemClicked }: ActionMo
                   variant="ghost"
                   className={`w-full justify-start gap-3 h-14 rounded-xl font-medium ${
                     index === 0 
-                      ? "bg-[hsl(342,69%,29%)] text-white hover:bg-[hsl(342,60%,40%)]" 
-                      : "bg-[hsl(342,69%,29%)] text-white hover:bg-[hsl(342,60%,40%)]"
+                      ? "bg-[#800000] text-white hover:bg-[#800000]/80" 
+                      : "bg-[#800000] text-white hover:bg-[#800000]/80"
                   }`}
                   onClick={action.onClick}
                 >

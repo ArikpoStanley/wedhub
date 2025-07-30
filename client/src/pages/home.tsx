@@ -134,7 +134,7 @@ export default function Home() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <div className="w-8 h-8 bg-[hsl(342,69%,29%)] rounded-full flex items-center justify-center border-2 border-[hsl(332,51%,70%)]">
+                      <div className="w-8 h-8 bg-[#800000] rounded-full flex items-center justify-center border-2 border-[hsl(332,51%,70%)]">
             <Heart className="text-white text-sm fill-current" />
           </div>
         </motion.div>
@@ -148,14 +148,14 @@ export default function Home() {
         >
           <h1 className="text-3xl md:text-5xl lg:text-5xl font-serif mb-6 leading-tight">
             <span className="text-[hsl(332,51%,70%)]">CELEBRATE LOVE,</span>
-            <span className="text-[hsl(342,69%,29%)]"> CELEBRATE</span>
+            <span className="text-[#800000]"> CELEBRATE</span>
             <br />
-            <span className="text-[hsl(342,69%,29%)]">LIFE </span> 
+            <span className="text-[#800000]">LIFE </span> 
             <span className="text-[hsl(332,51%,70%)]">WITH GRATITUDE</span>
           </h1>
           
           {/* Couple Names */}
-          <div className="text-4xl md:text-5xl font-script text-[hsl(342,69%,29%)] mt-8">
+          <div className="text-4xl md:text-5xl font-script text-[#800000] mt-8">
             Esther & Basil
           </div>
         </motion.div>
@@ -212,7 +212,7 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl md:text-5xl font-serif text-[hsl(342,69%,29%)] mb-6">
+              <h2 className="text-4xl md:text-5xl font-serif text-[#800000] mb-6">
                 Our journey is a beautiful tapestry, carefully woven by God
               </h2>
               <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
@@ -239,8 +239,8 @@ export default function Home() {
                     <div className="absolute inset-0 border-4 border-pink-200 rounded-t-[50%] rounded-b-lg"></div>
                     
                     {/* Heart decorations */}
-                    <div className="absolute -top-2 -right-2 text-[hsl(342,69%,29%)] text-2xl">❤️</div>
-                    <div className="absolute -bottom-2 -left-2 text-[hsl(342,69%,29%)] text-2xl">❤️</div>
+                    <div className="absolute -top-2 -right-2 text-[#800000] text-2xl">❤️</div>
+                    <div className="absolute -bottom-2 -left-2 text-[#800000] text-2xl">❤️</div>
                     
                     {/* Couple photo */}
                     <div className="absolute inset-8 bg-amber-50 rounded-t-[40%] rounded-b-md overflow-hidden">
@@ -263,9 +263,9 @@ export default function Home() {
                 viewport={{ once: true }}
               >
                 {/* Ring icon */}
-                <div className="text-[hsl(342,69%,29%)] text-2xl mb-4">💍</div>
+                <div className="text-[#800000] text-2xl mb-4">💍</div>
                 
-                <h3 className="text-3xl font-script text-[hsl(342,69%,29%)]">Esther & Basil</h3>
+                <h3 className="text-3xl font-script text-[#800000]">Esther & Basil</h3>
                 <h4 className="text-xl font-serif text-gray-800">Two hearts. One divine journey.</h4>
                 <p className="text-gray-700 leading-relaxed">
                   Esther and Basil are proof that when love is led by faith, it becomes something extraordinary. 
@@ -280,7 +280,7 @@ export default function Home() {
                 <div className="relative">
                 <Button 
                   onClick={() => window.location.href = '/our-story'}
-                  className="bg-[hsl(342,69%,29%)] text-white px-6 py-2 rounded-full font-medium hover:bg-[hsl(342,60%,40%)] transition-colors transform rotate-3"
+                  className="bg-[#800000] text-white px-6 py-2 rounded-full font-medium hover:bg-[hsl(342,60%,40%)] transition-colors transform rotate-3"
                 >
                   COUPLE STORY
                 </Button>
@@ -325,7 +325,7 @@ export default function Home() {
             <div className="flex justify-center lg:justify-end">
           <Button 
             onClick={() => scrollToSection('schedule')}
-                className="w-32 h-32 rounded-full bg-[hsl(342,69%,29%)] text-white text-lg font-bold hover:bg-[hsl(342,60%,40%)] transition-colors shadow-xl flex items-center justify-center"
+                className="w-32 h-32 rounded-full bg-[#800000] text-white text-lg font-bold hover:bg-[hsl(342,60%,40%)] transition-colors shadow-xl flex items-center justify-center"
           >
                 WEDDING<br />INFO
           </Button>
@@ -345,7 +345,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             {/* First image - arched frame */}
-            <div className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 relative">
+            <div className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 relative">
               {/* Outer div: Creates the arched border frame */}
               <div className="absolute inset-0 border-4 border-pink-200 rounded-t-[50%] rounded-b-lg"></div>
               
@@ -377,14 +377,20 @@ export default function Home() {
               />
             </div>
             
-            {/* Fourth image - smaller */}
-            <div className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 rounded-full border-2 border-pink-200 overflow-hidden shadow-lg">
-              <img 
-                src={weddingPhotos[3].src}
-                alt={weddingPhotos[3].alt}
-                className="w-full h-full object-cover" 
-              />
-        </div>
+            {/* Fourth image - arched frame */}
+            <div className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 relative">
+              {/* Outer div: Creates the arched border frame */}
+              <div className="absolute inset-0 border-4 border-pink-200 rounded-t-[50%] rounded-b-lg"></div>
+              
+              {/* Inner div: Creates the curved image container */}
+              <div className="absolute inset-2 bg-amber-50 rounded-t-[50%] rounded-b-md overflow-hidden">
+                <img 
+                  src={weddingPhotos[3].src}
+                  alt={weddingPhotos[3].alt}
+                  className="w-full h-full object-cover" 
+                />
+              </div>
+            </div>
             
             {/* Fifth image - smaller */}
             <div className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 rounded-full border-2 border-pink-200 overflow-hidden shadow-lg">
@@ -414,7 +420,7 @@ export default function Home() {
       >
         {/* Action Bar */}
         <div 
-          className="bg-[hsl(342,69%,29%)] text-white py-2 md:py-3 px-4 md:px-6 rounded-full shadow-lg cursor-pointer max-w-md mx-auto"
+          className="bg-[#800000] text-white py-2 md:py-3 px-4 md:px-6 rounded-full shadow-lg cursor-pointer max-w-md mx-auto"
           onClick={() => {
             setIsActionModalOpen(true);
             setIsModalDisabled(false);
