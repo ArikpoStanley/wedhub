@@ -344,13 +344,19 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            {/* First image - smaller */}
-            <div className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 rounded-full border-2 border-pink-200 overflow-hidden shadow-lg">
-              <img 
-                src={weddingPhotos[0].src}
-                alt={weddingPhotos[0].alt}
-                className="w-full h-full object-cover" 
-              />
+            {/* First image - arched frame */}
+            <div className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 relative">
+              {/* Outer div: Creates the arched border frame */}
+              <div className="absolute inset-0 border-4 border-pink-200 rounded-t-[50%] rounded-b-lg"></div>
+              
+              {/* Inner div: Creates the curved image container */}
+              <div className="absolute inset-2 bg-amber-50 rounded-t-[40%] rounded-b-md overflow-hidden">
+                <img 
+                  src={weddingPhotos[0].src}
+                  alt={weddingPhotos[0].alt}
+                  className="w-full h-full object-cover" 
+                />
+              </div>
             </div>
             
             {/* Second image - smaller */}
