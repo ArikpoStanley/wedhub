@@ -16,37 +16,53 @@ export default function RSVP() {
     email: "",
     attendance: "",
     guests: "1",
-    message: ""
+    message: "",
+    whatsappInvite: "",
+    willAttend: "",
   });
 
   const handleRsvpSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("RSVP submitted:", rsvpForm);
-    
+
     // Fire confetti burst on RSVP submission
     confetti({
       particleCount: 150,
       spread: 70,
       origin: { y: 0.6 },
       colors: [
-        '#f472b6', '#ec4899', '#db2777', '#be185d', '#fbbf24',
-        '#f59e0b', '#10b981', '#059669', '#3b82f6', '#1d4ed8',
-        '#8b5cf6', '#7c3aed', '#ef4444', '#dc2626', '#ffffff',
+        "#f472b6",
+        "#ec4899",
+        "#db2777",
+        "#be185d",
+        "#fbbf24",
+        "#f59e0b",
+        "#10b981",
+        "#059669",
+        "#3b82f6",
+        "#1d4ed8",
+        "#8b5cf6",
+        "#7c3aed",
+        "#ef4444",
+        "#dc2626",
+        "#ffffff",
       ],
-      shapes: ['circle', 'square'],
+      shapes: ["circle", "square"],
       gravity: 0.8,
       ticks: 200,
       startVelocity: 30,
       decay: 0.95,
     });
-    
+
     // Reset form
     setRsvpForm({
       name: "",
       email: "",
       attendance: "",
       guests: "1",
-      message: ""
+      message: "",
+      whatsappInvite: "",
+      willAttend: "",
     });
   };
 
@@ -54,12 +70,12 @@ export default function RSVP() {
     <div className="min-h-screen bg-rose-50 relative">
       <ConfettiBackground />
       <ConfettiBurst />
-      
+
       <NavigationBar currentPage="rsvp" />
 
       <div className="container mx-auto px-4 py-12">
         {/* Hero Section */}
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -70,7 +86,7 @@ export default function RSVP() {
           </h1>
 
           {/* Countdown Timer */}
-          <motion.div 
+          <motion.div
             className="mb-12"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -78,118 +94,212 @@ export default function RSVP() {
           >
             <CountdownTimer targetDate="2025-08-02T00:00:00" />
           </motion.div>
-        </motion.div>
 
-        {/* RSVP Section */}
-        <section className="mb-20">
-          <motion.div 
-            className="max-w-2xl mx-auto"
+          {/* WhatsApp Invite Section */}
+          <motion.div
+            className="max-w-2xl mx-auto mb-12"
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
           >
-            <Card className="p-8 bg-white/80 backdrop-blur-sm border-0 shadow-lg">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 bg-[hsl(342,69%,29%)] rounded-full flex items-center justify-center text-white font-bold text-xl">
-                  01
+            <Card className="p-8 bg-white/90 backdrop-blur-sm border-0 shadow-lg">
+              <h2 className="text-3xl font-serif text-[hsl(342,69%,29%)] mb-6">
+                RSVP
+              </h2>
+              <hr className="border-[hsl(342,69%,29%)] mb-8" />
+
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-lg font-medium text-[hsl(342,69%,29%)] mb-4">
+                    Did you receive an invite card via WhatsApp?{" "}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <div className="flex gap-6">
+                    <label className="flex items-center gap-3 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="whatsappInvite"
+                        value="no"
+                        checked={rsvpForm.whatsappInvite === "no"}
+                        onChange={(e) =>
+                          setRsvpForm({
+                            ...rsvpForm,
+                            whatsappInvite: e.target.value,
+                          })
+                        }
+                        className="w-5 h-5 text-[hsl(342,69%,29%)] border-2 border-[hsl(342,69%,29%)] focus:ring-[hsl(342,69%,29%)]"
+                      />
+                      <span className="text-lg text-[hsl(342,69%,29%)]">
+                        No
+                      </span>
+                    </label>
+                    <label className="flex items-center gap-3 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="whatsappInvite"
+                        value="yes"
+                        checked={rsvpForm.whatsappInvite === "yes"}
+                        onChange={(e) =>
+                          setRsvpForm({
+                            ...rsvpForm,
+                            whatsappInvite: e.target.value,
+                          })
+                        }
+                        className="w-5 h-5 text-[hsl(342,69%,29%)] border-2 border-[hsl(342,69%,29%)] focus:ring-[hsl(342,69%,29%)]"
+                      />
+                      <span className="text-lg text-[hsl(342,69%,29%)]">
+                        Yes
+                      </span>
+                    </label>
+                  </div>
                 </div>
-                <h2 className="text-3xl font-serif text-[hsl(342,69%,29%)]">RSVP FORM</h2>
+
+                {/* Conditional message when "No" is selected */}
+                {rsvpForm.whatsappInvite === "no" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="mt-6"
+                  >
+                    <div className="bg-rose-200/60 backdrop-blur-sm rounded-lg p-6 text-center">
+                      <p className="text-lg text-[hsl(342,69%,29%)] font-medium">
+                        We're sorry, you may not be able to attend without an
+                        invite card 😢
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Conditional attendance question when "Yes" is selected */}
+                {rsvpForm.whatsappInvite === "yes" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="mt-6"
+                  >
+                    <div>
+                      <label className="block text-lg font-medium text-[hsl(342,69%,29%)] mb-4">
+                        Will you be Attending?{" "}
+                        <span className="text-red-500">*</span>
+                      </label>
+                      <div className="flex gap-6">
+                        <label className="flex items-center gap-3 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="willAttend"
+                            value="no"
+                            checked={rsvpForm.willAttend === "no"}
+                            onChange={(e) =>
+                              setRsvpForm({
+                                ...rsvpForm,
+                                willAttend: e.target.value,
+                              })
+                            }
+                            className="w-5 h-5 text-[hsl(342,69%,29%)] border-2 border-[hsl(342,69%,29%)] focus:ring-[hsl(342,69%,29%)]"
+                          />
+                          <span className="text-lg text-[hsl(342,69%,29%)]">
+                            No
+                          </span>
+                        </label>
+                        <label className="flex items-center gap-3 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="willAttend"
+                            value="yes"
+                            checked={rsvpForm.willAttend === "yes"}
+                            onChange={(e) =>
+                              setRsvpForm({
+                                ...rsvpForm,
+                                willAttend: e.target.value,
+                              })
+                            }
+                            className="w-5 h-5 text-[hsl(342,69%,29%)] border-2 border-[hsl(342,69%,29%)] focus:ring-[hsl(342,69%,29%)]"
+                          />
+                          <span className="text-lg text-[hsl(342,69%,29%)]">
+                            Yes
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+
+                    {/* Message when willAttend is "no" */}
+                    {rsvpForm.willAttend === "no" && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="mt-6"
+                      >
+                        <div className="bg-rose-200/60 backdrop-blur-sm rounded-lg p-6 text-center">
+                          <p className="text-lg text-[hsl(342,69%,29%)] font-medium">
+                            We're sorry to hear that you won't be attending 😢
+                          </p>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {/* Name and Email fields - only show when willAttend is "yes" */}
+                    {rsvpForm.willAttend === "yes" && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="mt-6 space-y-6"
+                      >
+                        <div>
+                          <label className="block text-lg font-medium text-[hsl(342,69%,29%)] mb-3">
+                            Full Name <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            value={rsvpForm.name}
+                            onChange={(e) =>
+                              setRsvpForm({ ...rsvpForm, name: e.target.value })
+                            }
+                            className="w-full px-4 py-3 border-2 border-[hsl(342,69%,29%)] rounded-full focus:ring-2 focus:ring-[hsl(342,69%,29%)] focus:border-transparent bg-white/80"
+                            placeholder="Enter your full name"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-lg font-medium text-[hsl(342,69%,29%)] mb-3">
+                            Email <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="email"
+                            required
+                            value={rsvpForm.email}
+                            onChange={(e) =>
+                              setRsvpForm({
+                                ...rsvpForm,
+                                email: e.target.value,
+                              })
+                            }
+                            className="w-full px-4 py-3 border-2 border-[hsl(342,69%,29%)] rounded-full focus:ring-2 focus:ring-[hsl(342,69%,29%)] focus:border-transparent bg-white/80"
+                            placeholder="Enter your email address"
+                          />
+                        </div>
+
+                        <button
+                          onClick={handleRsvpSubmit}
+                          className="w-full bg-transparent border-2 border-[hsl(342,69%,29%)] text-[hsl(342,69%,29%)] hover:bg-[hsl(342,69%,29%)] hover:text-white py-3 text-lg rounded-full font-medium transition-all duration-300 hover:shadow-lg cursor-pointer"
+                        >
+                          RSVP
+                        </button>
+                      </motion.div>
+                    )}
+                  </motion.div>
+                )}
               </div>
-              
-              <p className="text-gray-700 mb-8">
-                Please take a moment to let us know if you'll be able to join us by filling out the contact form below.
-              </p>
-
-              <form onSubmit={handleRsvpSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={rsvpForm.name}
-                    onChange={(e) => setRsvpForm({...rsvpForm, name: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[hsl(342,69%,29%)] focus:border-transparent"
-                    placeholder="Enter your full name"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    value={rsvpForm.email}
-                    onChange={(e) => setRsvpForm({...rsvpForm, email: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[hsl(342,69%,29%)] focus:border-transparent"
-                    placeholder="Enter your email address"
-                  />
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Will you attend? *
-                    </label>
-                    <select
-                      required
-                      value={rsvpForm.attendance}
-                      onChange={(e) => setRsvpForm({...rsvpForm, attendance: e.target.value})}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[hsl(342,69%,29%)] focus:border-transparent"
-                    >
-                      <option value="">Please select</option>
-                      <option value="yes">Yes, I'll be there!</option>
-                      <option value="no">Sorry, can't make it</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Number of Guests
-                    </label>
-                    <select
-                      value={rsvpForm.guests}
-                      onChange={(e) => setRsvpForm({...rsvpForm, guests: e.target.value})}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[hsl(342,69%,29%)] focus:border-transparent"
-                    >
-                      <option value="1">Just me</option>
-                      <option value="2">2 people</option>
-                      <option value="3">3 people</option>
-                      <option value="4">4 people</option>
-                      <option value="5+">5+ people</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Special Message (Optional)
-                  </label>
-                  <textarea
-                    value={rsvpForm.message}
-                    onChange={(e) => setRsvpForm({...rsvpForm, message: e.target.value})}
-                    rows={4}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[hsl(342,69%,29%)] focus:border-transparent"
-                    placeholder="Any special requests or messages for the couple..."
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  className="w-full bg-[hsl(342,69%,29%)] text-white hover:bg-[hsl(342,60%,40%)] py-3 text-lg"
-                >
-                  Send RSVP
-                </Button>
-              </form>
             </Card>
           </motion.div>
-        </section>
+        </motion.div>
       </div>
-      
+
       <Footer />
     </div>
   );
-} 
+}
