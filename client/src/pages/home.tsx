@@ -178,7 +178,7 @@ export default function Home() {
             {[...weddingPhotos, ...weddingPhotos].map((photo, index) => (
               <motion.div 
                 key={index}
-                className="group flex-shrink-0 w-80 h-96 overflow-hidden rounded-xl shadow-lg"
+                className="group flex-shrink-0 w-80 h-96 overflow-hidden shadow-lg"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
