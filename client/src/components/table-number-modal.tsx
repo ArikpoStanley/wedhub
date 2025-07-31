@@ -52,7 +52,7 @@ export default function TableNumberModal({ isOpen, onClose }: TableNumberModalPr
 
   return (
     <motion.div
-      className="fixed inset-0 z-[9999] flex items-center justify-center"
+      className="fixed inset-0 z-[9999] flex items-center justify-center -mt-80"
       initial={{ opacity: 0 }}
       animate={{ opacity: isOpen ? 1 : 0 }}
       exit={{ opacity: 0 }}
@@ -61,7 +61,7 @@ export default function TableNumberModal({ isOpen, onClose }: TableNumberModalPr
     >
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-black"
+        className="fixed inset-0 bg-black/50"
         onClick={handleClose}
       />
       
@@ -140,15 +140,7 @@ export default function TableNumberModal({ isOpen, onClose }: TableNumberModalPr
             </motion.div>
           )}
 
-          {/* Footer navigation */}
-          <div className="mt-8 pt-6 border-t border-gray-200">
-            <Button
-              className="w-full bg-[hsl(342,69%,29%)] text-white hover:bg-[hsl(342,60%,40%)] py-4 text-lg"
-              onClick={handleClose}
-            >
-              Programme | Calendar | Get Direction | Check Table No.
-            </Button>
-          </div>
+         
         </div>
       </motion.div>
     </motion.div>
