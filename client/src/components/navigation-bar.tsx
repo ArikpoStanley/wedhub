@@ -70,7 +70,7 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
               </button>
               <button 
                 onClick={() => navigate("/our-story")}
-                className={`font-script font-medium transition-colors text-lg ${
+                className={`font-script font-medium transition-colors text-xl ${
                   isCurrentPage("our-story") 
                     ? "text-[#800000] border border-[#800000] px-3 py-1 rounded"
                     : "text-[#800000] hover:text-[hsl(342,60%,40%)]"
@@ -80,7 +80,7 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
               </button>
               <button 
                 onClick={() => navigate("/gallery")}
-                className={`font-script font-medium transition-colors text-lg ${
+                className={`font-script font-medium transition-colors text-xl ${
                   isCurrentPage("gallery") 
                     ? "text-[#800000] border border-[#800000] px-3 py-1 rounded"
                     : "text-[#800000] hover:text-[hsl(342,60%,40%)]"
@@ -113,7 +113,7 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
               <nav className="hidden lg:flex space-x-8">
                 <button 
                   onClick={() => navigate("/registry")}
-                  className={`font-script font-medium transition-colors text-lg ${
+                  className={`font-script font-medium transition-colors text-xl ${
                     isCurrentPage("registry") 
                       ? "text-[#800000] border border-[#800000] px-3 py-1 rounded"
                       : "text-[#800000] hover:text-[hsl(342,60%,40%)]"
@@ -123,7 +123,7 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
                 </button>
                 <button 
                   onClick={() => navigate("/schedule")}
-                  className={`font-script font-medium transition-colors text-lg ${
+                  className={`font-script font-medium transition-colors text-xl ${
                     isCurrentPage("schedule") 
                       ? "text-[#800000] border border-[#800000] px-3 py-1 rounded"
                       : "text-[#800000] hover:text-[hsl(342,60%,40%)]"
@@ -133,7 +133,7 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
                 </button>
                 <button 
                   onClick={() => navigate("/rsvp")}
-                  className={`font-script font-medium transition-colors text-lg ${
+                  className={`font-script font-medium transition-colors text-xl ${
                     isCurrentPage("rsvp") 
                       ? "text-[#800000] border border-[#800000] px-3 py-1 rounded"
                       : "text-[#800000] hover:text-[hsl(342,60%,40%)]"
