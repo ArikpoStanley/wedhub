@@ -14,11 +14,15 @@ import PhotoPanels from "@/components/photo-panels";
 export default function OurStory() {
   const storyQuestions = [
     {
-      question: "How did you both meet?",
+      question: "How Did You First Meet?",
       answers: [
         {
-          name: "Esther & Basil",
-          text: "We both met on LinkedIn. As we continued to chat we got each other's contact. Our conversations started around work and gradually extended to everything else. We would chat all day and call all night. We started hanging out after work and on weekends till we became inseparable."
+          name: "Esther",
+          text: "We met on LinkedIn in 2019. I invited him to a business meeting as a prospective client for the company I was working with at the time"
+        },
+        {
+          name: "Basil",
+          text: "We met on LinkedIn as professionals for a business meeting."
         }
       ]
     },
@@ -139,20 +143,15 @@ export default function OurStory() {
             title: item.question,
             backgroundColor: cardColors[index % cardColors.length],
             content: (
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {item.answers.map((answer, answerIndex) => (
-                  <div key={answerIndex}>
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-8 h-8 bg-[hsl(342,69%,29%)] rounded-full flex items-center justify-center">
-                        <span className="text-white font-script text-sm font-bold">
-                          {answer.name === "Esther" ? "E" : answer.name === "Basil" ? "B" : "E&B"}
-                        </span>
-                      </div>
-                      <span className="font-serif font-semibold text-[hsl(342,69%,29%)] text-lg">
+                  <div key={answerIndex} className="mb-6">
+                    <div className="inline-block bg-[#800000] text-white px-4 py-2 rounded-lg mb-3">
+                      <span className="font-script text-sm font-bold">
                         {answer.name}
                       </span>
                     </div>
-                    <p className="text-gray-700 leading-relaxed ml-11 text-base">
+                    <p className="text-gray-700 leading-relaxed text-base">
                       {answer.text}
                     </p>
                   </div>
