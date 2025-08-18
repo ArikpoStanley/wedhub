@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useLocation } from "wouter";
 
-import CountdownTimer from "@/components/countdown-timer";
 import ConfettiBackground from "@/components/confetti-background";
 import ConfettiBurst from "@/components/confetti-burst";
 import NavigationBar from "@/components/navigation-bar";
@@ -28,29 +27,7 @@ export default function Schedule() {
       <NavigationBar currentPage="schedule" />
 
       <div className="container mx-auto px-4 py-12">
-        {/* Hero Section */}
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1 className="text-4xl md:text-6xl font-serif text-[hsl(342,69%,29%)] mb-8">
-            WE'RE GETTING <span className="text-[hsl(332,51%,70%)]">MARRIED!</span>
-          </h1>
 
-          {/* Countdown Timer */}
-          <motion.div 
-            className="mb-12 bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-          >
-            <CountdownTimer targetDate="2025-08-02T00:00:00" />
-          </motion.div>
-
-
-        </motion.div>
 
 
 
