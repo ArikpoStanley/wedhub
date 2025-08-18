@@ -93,18 +93,12 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
             {/* Center Logo */}
             <div className="flex flex-col items-center">
               <div className="relative">
-                {/* Floral wreath background */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div 
-                    className="w-16 h-16 rounded-full border-2 border-[hsl(332,51%,70%)] flex items-center justify-center cursor-pointer hover:scale-105 transition-transform"
-                    onClick={handleLogoClick}
-                  >
-                    <div className="w-12 h-12 rounded-full border border-[hsl(332,51%,70%)] flex items-center justify-center">
-                      <span className="text-[#800000] font-script text-2xl font-bold">E&B</span>
-                    </div>
-                  </div>
-                </div>
-                {/* Decorative flowers around the logo */}
+                <img
+                  src="https://res.cloudinary.com/dycukxm7r/image/upload/v1755525560/EBLogo-removebg-preview_cskhkd.png"
+                  alt="E&B Wedding Logo"
+                  className="w-16 h-16 object-contain cursor-pointer hover:scale-105 transition-transform"
+                  onClick={handleLogoClick}
+                />
               </div>
             </div>
 

@@ -1,10 +1,31 @@
+import 'dotenv/config';
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { closeMongoDB } from "./mongodb";
+
+// Windows-specific environment setup
+if (process.platform === 'win32') {
+  // Set default encoding for Windows
+  process.env.CHCP = '65001'; // UTF-8
+}
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Graceful shutdown
+process.on('SIGINT', async () => {
+  console.log('Received SIGINT, shutting down gracefully...');
+  await closeMongoDB();
+  process.exit(0);
+});
+
+process.on('SIGTERM', async () => {
+  console.log('Received SIGTERM, shutting down gracefully...');
+  await closeMongoDB();
+  process.exit(0);
+});
 
 app.use((req, res, next) => {
   const start = Date.now();

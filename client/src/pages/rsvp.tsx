@@ -9,61 +9,97 @@ import ConfettiBurst from "@/components/confetti-burst";
 import NavigationBar from "@/components/navigation-bar";
 import Footer from "@/components/footer";
 import confetti from "canvas-confetti";
+import { weddingApi } from "@/services/wedding-api";
+import type { CreateRSVP } from "@shared/wedding-schema";
 
 export default function RSVP() {
   const [rsvpForm, setRsvpForm] = useState({
     name: "",
     email: "",
-    attendance: "",
-    guests: "1",
+    guests: 1,
     message: "",
-    whatsappInvite: "",
-    willAttend: "",
+    whatsappInvite: "" as "yes" | "no" | "",
+    willAttend: "" as "yes" | "no" | "",
   });
 
-  const handleRsvpSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState("");
+  const [submitError, setSubmitError] = useState("");
+
+  const handleRsvpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("RSVP submitted:", rsvpForm);
+    
+    if (!rsvpForm.name || !rsvpForm.email || !rsvpForm.whatsappInvite || !rsvpForm.willAttend) {
+      setSubmitError("Please fill in all required fields");
+      return;
+    }
 
-    // Fire confetti burst on RSVP submission
-    confetti({
-      particleCount: 150,
-      spread: 70,
-      origin: { y: 0.6 },
-      colors: [
-        "#f472b6",
-        "#ec4899",
-        "#db2777",
-        "#be185d",
-        "#fbbf24",
-        "#f59e0b",
-        "#10b981",
-        "#059669",
-        "#3b82f6",
-        "#1d4ed8",
-        "#8b5cf6",
-        "#7c3aed",
-        "#ef4444",
-        "#dc2626",
-        "#ffffff",
-      ],
-      shapes: ["circle", "square"],
-      gravity: 0.8,
-      ticks: 200,
-      startVelocity: 30,
-      decay: 0.95,
-    });
+    setIsSubmitting(true);
+    setSubmitError("");
+    setSubmitMessage("");
 
-    // Reset form
-    setRsvpForm({
-      name: "",
-      email: "",
-      attendance: "",
-      guests: "1",
-      message: "",
-      whatsappInvite: "",
-      willAttend: "",
-    });
+    try {
+      const rsvpData: CreateRSVP = {
+        name: rsvpForm.name,
+        email: rsvpForm.email,
+        whatsappInvite: rsvpForm.whatsappInvite,
+        willAttend: rsvpForm.willAttend,
+        guests: rsvpForm.guests,
+        message: rsvpForm.message || undefined,
+      };
+
+      const response = await weddingApi.submitRSVP(rsvpData);
+      
+      if (response.success) {
+        setSubmitMessage("Thank you! Your RSVP has been submitted successfully.");
+        
+        // Fire confetti burst on successful RSVP submission
+        confetti({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: [
+            "#f472b6",
+            "#ec4899",
+            "#db2777",
+            "#be185d",
+            "#fbbf24",
+            "#f59e0b",
+            "#10b981",
+            "#059669",
+            "#3b82f6",
+            "#1d4ed8",
+            "#8b5cf6",
+            "#7c3aed",
+            "#ef4444",
+            "#dc2626",
+            "#ffffff",
+          ],
+          shapes: ["circle", "square"],
+          gravity: 0.8,
+          ticks: 200,
+          startVelocity: 30,
+          decay: 0.95,
+        });
+
+        // Reset form
+        setRsvpForm({
+          name: "",
+          email: "",
+          guests: 1,
+          message: "",
+          whatsappInvite: "",
+          willAttend: "",
+        });
+      } else {
+        setSubmitError(response.message || "Failed to submit RSVP");
+      }
+    } catch (error) {
+      console.error("Error submitting RSVP:", error);
+      setSubmitError(error instanceof Error ? error.message : "Failed to submit RSVP. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -124,7 +160,7 @@ export default function RSVP() {
                         onChange={(e) =>
                           setRsvpForm({
                             ...rsvpForm,
-                            whatsappInvite: e.target.value,
+                            whatsappInvite: e.target.value as "yes" | "no",
                           })
                         }
                         className="w-5 h-5 text-[hsl(342,69%,29%)] border-2 border-[hsl(342,69%,29%)] focus:ring-[hsl(342,69%,29%)]"
@@ -142,7 +178,7 @@ export default function RSVP() {
                         onChange={(e) =>
                           setRsvpForm({
                             ...rsvpForm,
-                            whatsappInvite: e.target.value,
+                            whatsappInvite: e.target.value as "yes" | "no",
                           })
                         }
                         className="w-5 h-5 text-[hsl(342,69%,29%)] border-2 border-[hsl(342,69%,29%)] focus:ring-[hsl(342,69%,29%)]"
@@ -194,7 +230,7 @@ export default function RSVP() {
                             onChange={(e) =>
                               setRsvpForm({
                                 ...rsvpForm,
-                                willAttend: e.target.value,
+                                willAttend: e.target.value as "yes" | "no",
                               })
                             }
                             className="w-5 h-5 text-[hsl(342,69%,29%)] border-2 border-[hsl(342,69%,29%)] focus:ring-[hsl(342,69%,29%)]"
@@ -212,7 +248,7 @@ export default function RSVP() {
                             onChange={(e) =>
                               setRsvpForm({
                                 ...rsvpForm,
-                                willAttend: e.target.value,
+                                willAttend: e.target.value as "yes" | "no",
                               })
                             }
                             className="w-5 h-5 text-[hsl(342,69%,29%)] border-2 border-[hsl(342,69%,29%)] focus:ring-[hsl(342,69%,29%)]"
@@ -283,11 +319,33 @@ export default function RSVP() {
                           />
                         </div>
 
+                        {/* Success/Error Messages */}
+                        {submitMessage && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg"
+                          >
+                            {submitMessage}
+                          </motion.div>
+                        )}
+
+                        {submitError && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg"
+                          >
+                            {submitError}
+                          </motion.div>
+                        )}
+
                         <button
                           onClick={handleRsvpSubmit}
-                          className="w-full bg-transparent border-2 border-[hsl(342,69%,29%)] text-[hsl(342,69%,29%)] hover:bg-[hsl(342,69%,29%)] hover:text-white py-3 text-lg rounded-full font-medium transition-all duration-300 hover:shadow-lg cursor-pointer"
+                          disabled={isSubmitting}
+                          className="w-full bg-transparent border-2 border-[hsl(342,69%,29%)] text-[hsl(342,69%,29%)] hover:bg-[hsl(342,69%,29%)] hover:text-white py-3 text-lg rounded-full font-medium transition-all duration-300 hover:shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          RSVP
+                          {isSubmitting ? "Submitting..." : "RSVP"}
                         </button>
                       </motion.div>
                     )}
