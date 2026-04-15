@@ -49,36 +49,28 @@ export default function Home() {
 
   const weddingPhotos = [
     {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732420/IMG_0674.JPG_ea3rbd.jpg",
-      alt: "Elegant wedding couple portrait",
+      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776227725/DSC_8787_wrwgc9.jpg",
+      alt: "Mymee in traditional attire",
     },
     {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732419/IMG_0671.JPG_jore55.jpg",
-      alt: "Bride and groom dancing",
+      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776227700/DSC_8764_vvhtp1.jpg",
+      alt: "David in traditional attire",
     },
     {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732396/IMG_0668.JPG_dmwtgv.jpg",
-      alt: "Wedding couple in white formal wear",
+      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776227687/DSC_8756_bbieof.jpg",
+      alt: "Mymee and David together",
     },
     {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732369/IMG_0677.JPG_s1677d.jpg",
-      alt: "Couple sharing romantic moment",
+      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776227680/DSC_8775_ta3pbs.jpg",
+      alt: "Couple portrait",
     },
     {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732393/IMG_0669.JPG_jpfqb6.jpg",
-      alt: "Wedding rings on floral background",
+      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776227664/DSC_8782_bqdxop.jpg",
+      alt: "Mymee smiling",
     },
     {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732359/IMG-20250611-WA0003_n09jue.jpg",
-      alt: "Wedding bouquet with roses",
-    },
-    {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732345/IMG_0682.JPG_sggzxj.jpg",
-      alt: "Wedding ceremony setup",
-    },
-    {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732305/IMG_0681.JPG_s19f99.jpg",
-      alt: "Groom in formal suit",
+      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776227671/PreweddingPictures_odczgq.jpg",
+      alt: "Pre-wedding pictures",
     },
   ];
 
@@ -92,7 +84,7 @@ export default function Home() {
       {/* Hero Section */}
       <section
         id="home"
-        className="h-auto flex flex-col justify-start items-center text-center px-4 pt-32 md:pt-40 relative"
+        className="h-auto flex flex-col justify-start items-center text-center px-4 pt-6 md:pt-10 relative"
       >
         {/* Floating hearts decoration */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -199,7 +191,7 @@ export default function Home() {
                 <img
                   src={photo.src}
                   alt={photo.alt}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
               </motion.div>
             ))}
@@ -259,7 +251,7 @@ export default function Home() {
                   {/* Arched frame with hearts */}
                   <div className="relative w-80 h-96 mx-auto">
                     {/* Main arched border - semi-circular top, straight sides, rounded bottom */}
-                    <div className="absolute inset-0 border-4 border-pink-200 rounded-t-[50%] rounded-b-lg"></div>
+                    <div className="absolute inset-0 border-4 border-pink-200 rounded-t-[10rem] rounded-b-lg"></div>
 
                     {/* Heart decorations */}
                     <div className="absolute -top-2 -right-2 text-[#800000] text-2xl">
@@ -270,11 +262,11 @@ export default function Home() {
                     </div>
 
                     {/* Couple photo */}
-                    <div className="absolute inset-8 bg-amber-50 rounded-t-[40%] rounded-b-md overflow-hidden">
+                    <div className="absolute inset-8 bg-amber-50 rounded-t-[8rem] rounded-b-md overflow-hidden">
                       <img
                         src={weddingPhotos[0].src}
                         alt="Mymee & David"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-top"
                       />
                     </div>
                   </div>
@@ -313,66 +305,17 @@ export default function Home() {
 
                 {/* Couple Story button */}
                 <div className="relative">
-                  <Button
+                  {/* <Button
                     onClick={() => (window.location.href = "/our-story")}
                     className="bg-[#800000] text-white px-6 py-2 rounded-full font-medium hover:bg-[hsl(342,60%,40%)] transition-colors transform rotate-3"
                   >
                     COUPLE STORY
-                  </Button>
+                  </Button> */}
                 </div>
               </motion.div>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Wedding Invitation Section */}
-      <section
-        id="registry"
-        className="py-20 bg-white relative overflow-hidden"
-      >
-        {/* Background table setting */}
-        <div className="absolute inset-0">
-          <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=800')] bg-cover bg-center"></div>
-        </div>
-
-        <motion.div
-          className="container mx-auto px-4 relative z-10"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[500px]">
-            {/* Left side - Text content */}
-            <div className="text-center lg:text-left">
-              <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight max-w-full break-words">
-                <div>WE WANT TO</div>
-                <div>SHARE THIS</div>
-                <div>PRECIOUS</div>
-                <div>MOMENT WITH</div>
-                <div>YOU</div>
-              </h2>
-              <p className="text-lg md:text-xl text-white mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                Join us as we say "I do" and begin this beautiful new chapter
-                together. We can't wait for you to celebrate with us on April
-                18th, 2026!
-              </p>
-            </div>
-
-            {/* Right side - Circular button */}
-            <div className="flex justify-center lg:justify-end">
-              <Button
-                onClick={() => scrollToSection("schedule")}
-                className="w-32 h-32 rounded-full bg-[#800000] text-white text-lg font-bold hover:bg-[hsl(342,60%,40%)] transition-colors shadow-xl flex items-center justify-center"
-              >
-                WEDDING
-                <br />
-                INFO
-              </Button>
-            </div>
-          </div>
-        </motion.div>
       </section>
 
       {/* Additional Photo Gallery */}
@@ -386,23 +329,23 @@ export default function Home() {
             viewport={{ once: true }}
           >
             {/* Top left image */}
-            <div className="absolute top-0 left-0 w-20 h-24 border-4 border-pink-200 rounded-t-[50%] rounded-b-lg overflow-hidden">
-              <div className="absolute inset-1 bg-amber-50 rounded-t-[50%] rounded-b-md overflow-hidden">
+            <div className="absolute top-0 left-0 w-20 h-24 border-4 border-pink-200 rounded-t-[2.5rem] rounded-b-lg overflow-hidden">
+              <div className="absolute inset-1 bg-amber-50 rounded-t-[2.25rem] rounded-b-md overflow-hidden">
                 <img
                   src={weddingPhotos[0].src}
                   alt={weddingPhotos[0].alt}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
             </div>
 
             {/* Top right image */}
-            <div className="absolute top-0 right-0 w-20 h-24 border-4 border-pink-200 rounded-t-[50%] rounded-b-lg overflow-hidden">
-              <div className="absolute inset-1 bg-amber-50 rounded-t-[50%] rounded-b-md overflow-hidden">
+            <div className="absolute top-0 right-0 w-20 h-24 border-4 border-pink-200 rounded-t-[2.5rem] rounded-b-lg overflow-hidden">
+              <div className="absolute inset-1 bg-amber-50 rounded-t-[2.25rem] rounded-b-md overflow-hidden">
                 <img
                   src={weddingPhotos[1].src}
                   alt={weddingPhotos[1].alt}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
             </div>
@@ -412,28 +355,28 @@ export default function Home() {
               <img
                 src={weddingPhotos[2].src}
                 alt={weddingPhotos[2].alt}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-top"
               />
             </div>
 
             {/* Bottom left image */}
-            <div className="absolute bottom-0 left-0 w-20 h-24 border-4 border-pink-200 rounded-t-lg rounded-b-[50%] overflow-hidden">
-              <div className="absolute inset-1 bg-amber-50 rounded-t-md rounded-b-[50%] overflow-hidden">
+            <div className="absolute bottom-0 left-0 w-20 h-24 border-4 border-pink-200 rounded-t-lg rounded-b-[2.5rem] overflow-hidden">
+              <div className="absolute inset-1 bg-amber-50 rounded-t-md rounded-b-[2.25rem] overflow-hidden">
                 <img
                   src={weddingPhotos[3].src}
                   alt={weddingPhotos[3].alt}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
             </div>
 
             {/* Bottom right image */}
-            <div className="absolute bottom-0 right-0 w-20 h-24 border-4 border-pink-200 rounded-t-lg rounded-b-[50%] overflow-hidden">
-              <div className="absolute inset-1 bg-amber-50 rounded-t-md rounded-b-[50%] overflow-hidden">
+            <div className="absolute bottom-0 right-0 w-20 h-24 border-4 border-pink-200 rounded-t-lg rounded-b-[2.5rem] overflow-hidden">
+              <div className="absolute inset-1 bg-amber-50 rounded-t-md rounded-b-[2.25rem] overflow-hidden">
                 <img
                   src={weddingPhotos[4].src}
                   alt={weddingPhotos[4].alt}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
             </div>
@@ -450,14 +393,14 @@ export default function Home() {
             {/* First image - arched frame */}
             <div className="w-32 h-32 lg:w-40 lg:h-40 relative">
               {/* Outer div: Creates the arched border frame */}
-              <div className="absolute inset-0 border-4 border-pink-200 rounded-t-[50%] rounded-b-lg"></div>
+              <div className="absolute inset-0 border-4 border-pink-200 rounded-t-[4rem] lg:rounded-t-[5rem] rounded-b-lg"></div>
 
               {/* Inner div: Creates the curved image container */}
-              <div className="absolute inset-2 bg-amber-50 rounded-t-[50%] rounded-b-md overflow-hidden">
+              <div className="absolute inset-2 bg-amber-50 rounded-t-[3.5rem] lg:rounded-t-[4.5rem] rounded-b-md overflow-hidden">
                 <img
                   src={weddingPhotos[0].src}
                   alt={weddingPhotos[0].alt}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
             </div>
@@ -465,14 +408,14 @@ export default function Home() {
             {/* Second image - arched frame */}
             <div className="w-32 h-32 lg:w-40 lg:h-40 relative transform rotate-180">
               {/* Outer div: Creates the arched border frame */}
-              <div className="absolute inset-0 border-4 border-pink-200 rounded-t-[50%] rounded-b-lg"></div>
+              <div className="absolute inset-0 border-4 border-pink-200 rounded-t-[4rem] lg:rounded-t-[5rem] rounded-b-lg"></div>
 
               {/* Inner div: Creates the curved image container */}
-              <div className="absolute inset-2 bg-amber-50 rounded-t-[50%] rounded-b-md overflow-hidden">
+              <div className="absolute inset-2 bg-amber-50 rounded-t-[3.5rem] lg:rounded-t-[4.5rem] rounded-b-md overflow-hidden">
                 <img
                   src={weddingPhotos[1].src}
                   alt={weddingPhotos[1].alt}
-                  className="w-full h-full object-cover transform -rotate-180"
+                  className="w-full h-full object-cover object-top transform -rotate-180"
                 />
               </div>
             </div>
@@ -482,21 +425,21 @@ export default function Home() {
               <img
                 src={weddingPhotos[2].src}
                 alt={weddingPhotos[2].alt}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-top"
               />
             </div>
 
             {/* Fourth image - arched frame */}
             <div className="w-32 h-32 lg:w-40 lg:h-40 relative transform rotate-180">
               {/* Outer div: Creates the arched border frame */}
-              <div className="absolute inset-0 border-4 border-pink-200 rounded-t-[50%] rounded-b-lg"></div>
+              <div className="absolute inset-0 border-4 border-pink-200 rounded-t-[4rem] lg:rounded-t-[5rem] rounded-b-lg"></div>
 
               {/* Inner div: Creates the curved image container */}
-              <div className="absolute inset-2 bg-amber-50 rounded-t-[50%] rounded-b-md overflow-hidden">
+              <div className="absolute inset-2 bg-amber-50 rounded-t-[3.5rem] lg:rounded-t-[4.5rem] rounded-b-md overflow-hidden">
                 <img
                   src={weddingPhotos[3].src}
                   alt={weddingPhotos[3].alt}
-                  className="w-full h-full object-cover transform -rotate-180"
+                  className="w-full h-full object-cover object-top transform -rotate-180"
                 />
               </div>
             </div>
@@ -504,14 +447,14 @@ export default function Home() {
             {/* Fifth image - arched frame */}
             <div className="w-32 h-32 lg:w-40 lg:h-40 relative">
               {/* Outer div: Creates the arched border frame */}
-              <div className="absolute inset-0 border-4 border-pink-200 rounded-t-[50%] rounded-b-lg"></div>
+              <div className="absolute inset-0 border-4 border-pink-200 rounded-t-[4rem] lg:rounded-t-[5rem] rounded-b-lg"></div>
 
               {/* Inner div: Creates the curved image container */}
-              <div className="absolute inset-2 bg-amber-50 rounded-t-[50%] rounded-b-md overflow-hidden">
+              <div className="absolute inset-2 bg-amber-50 rounded-t-[3.5rem] lg:rounded-t-[4.5rem] rounded-b-md overflow-hidden">
                 <img
                   src={weddingPhotos[4].src}
                   alt={weddingPhotos[4].alt}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
             </div>

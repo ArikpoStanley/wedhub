@@ -57,13 +57,12 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
           <div className="flex items-center justify-between">
             {/* Left Navigation Items */}
             <nav className="hidden lg:flex space-x-8">
-              <button 
+              <button
                 onClick={() => navigate("/")}
-                className={`font-script font-medium transition-colors text-lg ${
-                  isCurrentPage("home") 
+                className={`font-script font-medium transition-colors text-lg ${isCurrentPage("home")
                     ? "text-[#800000] border border-[#800000] px-3 py-1 rounded"
                     : "text-[#800000] hover:text-[hsl(342,60%,40%)]"
-                }`}
+                  }`}
               >
                 Home
               </button>
@@ -79,13 +78,12 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
                 Our Story
               </button>
               */}
-              <button 
+              <button
                 onClick={() => navigate("/gallery")}
-                className={`font-script font-medium transition-colors text-xl ${
-                  isCurrentPage("gallery") 
+                className={`font-script font-medium transition-colors text-xl ${isCurrentPage("gallery")
                     ? "text-[#800000] border border-[#800000] px-3 py-1 rounded"
                     : "text-[#800000] hover:text-[hsl(342,60%,40%)]"
-                }`}
+                  }`}
               >
                 Gallery
               </button>
@@ -95,8 +93,8 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
             <div className="flex flex-col items-center">
               <div className="relative">
                 <img
-                  src="https://res.cloudinary.com/dycukxm7r/image/upload/v1755525560/EBLogo-removebg-preview_cskhkd.png"
-                  alt="E&B Wedding Logo"
+                  src="https://res.cloudinary.com/dycukxm7r/image/upload/v1776229630/MD-removebg-preview_yz3rat.png"
+                  alt="Mymee & David wedding logo"
                   className="w-8 h-8 md:w-16 md:h-16 object-contain cursor-pointer hover:scale-105 hover:rotate-360 transition-transform duration-700"
                   onClick={handleLogoClick}
                 />
@@ -106,23 +104,21 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
             {/* Right Navigation Items */}
             <div className="flex items-center space-x-6">
               <nav className="hidden lg:flex space-x-8">
-                <button 
+                <button
                   onClick={() => navigate("/registry")}
-                  className={`font-script font-medium transition-colors text-xl ${
-                    isCurrentPage("registry") 
+                  className={`font-script font-medium transition-colors text-xl ${isCurrentPage("registry")
                       ? "text-[#800000] border border-[#800000] px-3 py-1 rounded"
                       : "text-[#800000] hover:text-[hsl(342,60%,40%)]"
-                  }`}
+                    }`}
                 >
                   Registry
                 </button>
-                <button 
+                <button
                   onClick={() => navigate("/schedule")}
-                  className={`font-script font-medium transition-colors text-xl ${
-                    isCurrentPage("schedule") 
+                  className={`font-script font-medium transition-colors text-xl ${isCurrentPage("schedule")
                       ? "text-[#800000] border border-[#800000] px-3 py-1 rounded"
                       : "text-[#800000] hover:text-[hsl(342,60%,40%)]"
-                  }`}
+                    }`}
                 >
                   Schedule
                 </button>
@@ -141,7 +137,7 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
             </div>
           </div>
         </div>
-        
+
         {/* Decorative line below navigation */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-[#800000] to-transparent mt-4"></div>
       </header>

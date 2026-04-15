@@ -95,7 +95,7 @@ export default function Schedule() {
                     </div>
                     <div>
                       <h3 className="text-lg font-medium text-rose-400 mb-1">RSVP</h3>
-                      <p className="text-[hsl(342,69%,29%)] font-medium">+234 905 896 8649</p>
+                      <p className="text-[hsl(342,69%,29%)] font-medium">+234 708 887 0268</p>
                     </div>
                   </div>
 
@@ -105,8 +105,8 @@ export default function Schedule() {
                     </div>
                     <div>
                       <h3 className="text-lg font-medium text-rose-400 mb-1">Location</h3>
-                      <p className="text-[hsl(342,69%,29%)] font-medium">Aquila Events Hub, No 40 Tos Benson Road</p>
-                      <p className="text-[hsl(342,69%,29%)] font-medium">Ikorodu Ikorodu, Lagos 100001</p>
+                      <p className="text-[hsl(342,69%,29%)] font-medium">QUA IBOE CHURCH, IKOT OBIOKO,</p>
+                      <p className="text-[hsl(342,69%,29%)] font-medium">IKOT ABASI LGA, AKWA IBOM STATE</p>
                     </div>
                   </div>
                 </div>
@@ -146,7 +146,7 @@ export default function Schedule() {
                     </div>
                     <div>
                       <h3 className="text-lg font-medium text-rose-400 mb-1">Time</h3>
-                      <p className="text-[hsl(342,69%,29%)] font-medium">01:00PM</p>
+                      <p className="text-[hsl(342,69%,29%)] font-medium">02:00PM</p>
                     </div>
                   </div>
 
@@ -156,7 +156,7 @@ export default function Schedule() {
                     </div>
                     <div>
                       <h3 className="text-lg font-medium text-rose-400 mb-1">RSVP</h3>
-                      <p className="text-[hsl(342,69%,29%)] font-medium">+234 905 896 8649</p>
+                      <p className="text-[hsl(342,69%,29%)] font-medium">+234 708 887 0268</p>
                     </div>
                   </div>
 
@@ -166,8 +166,8 @@ export default function Schedule() {
                     </div>
                     <div>
                       <h3 className="text-lg font-medium text-rose-400 mb-1">Location</h3>
-                      <p className="text-[hsl(342,69%,29%)] font-medium">Aquila Events Hub, No 40 Tos Benson Road</p>
-                      <p className="text-[hsl(342,69%,29%)] font-medium">Ikorodu Ikorodu, Lagos 100001</p>
+                      <p className="text-[hsl(342,69%,29%)] font-medium">OTONG UBON, IKOT OBIOKO</p>
+                      <p className="text-[hsl(342,69%,29%)] font-medium">IKOT ABASI LGA, AKWA IBOM STATE</p>
                     </div>
                   </div>
                 </div>

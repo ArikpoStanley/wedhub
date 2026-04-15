@@ -11,48 +11,28 @@ import Footer from "@/components/footer";
 export default function Gallery() {
   const galleryPhotos = [
     {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732305/IMG_0681.JPG_s19f99.jpg",
-      alt: "Elegant wedding couple portrait"
+      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776227725/DSC_8787_wrwgc9.jpg",
+      alt: "Mymee in traditional attire"
     },
     {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732267/IMG_0678.JPG_ejv7ev.jpg",
-      alt: "Bride and groom dancing"
+      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776227700/DSC_8764_vvhtp1.jpg",
+      alt: "David in traditional attire"
     },
     {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732420/IMG_0674.JPG_ea3rbd.jpg",
-      alt: "Wedding couple in white formal wear"
+      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776227687/DSC_8756_bbieof.jpg",
+      alt: "Mymee and David together"
     },
     {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732331/IMG_0686.JPG_usoacs.jpg",
-      alt: "Couple sharing romantic moment"
+      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776227680/DSC_8775_ta3pbs.jpg",
+      alt: "Couple portrait"
     },
     {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732423/IMG_0689.JPG_k9xjdg.jpg",
-      alt: "Wedding rings on floral background"
+      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776227664/DSC_8782_bqdxop.jpg",
+      alt: "Mymee smiling"
     },
     {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732419/IMG_0671.JPG_jore55.jpg",
-      alt: "Beautiful wedding bouquet"
-    },
-    {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732396/IMG_0668.JPG_dmwtgv.jpg",
-      alt: "Wedding ceremony setup"
-    },
-    {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732369/IMG_0677.JPG_s1677d.jpg",
-      alt: "Groom in formal attire"
-    },
-        {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732344/IMG_0690.JPG_uhooq3.jpg",
-      alt: "Couple laughing together"
-    },
-    {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732364/IMG-20250615-WA0001_mhmpys.jpg",
-      alt: "Wedding celebration"
-    },
-    {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1755732324/IMG_0675.JPG_ibe1u2.jpg",
-      alt: "Couple laughing together"
+      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776227671/PreweddingPictures_odczgq.jpg",
+      alt: "Pre-wedding pictures"
     }
   ];
 
@@ -124,7 +104,7 @@ export default function Gallery() {
                 src={photo.src}
                 alt={photo.alt}
                 className={`
-                  w-full object-cover group-hover:scale-105 transition-transform duration-500
+                  w-full object-cover object-top group-hover:scale-105 transition-transform duration-500
                   ${index === 0 ? 'h-96 sm:h-full' : 'h-48 sm:h-64'}
                 `}
               />
