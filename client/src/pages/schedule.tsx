@@ -12,7 +12,7 @@ import Footer from "@/components/footer";
 export default function Schedule() {
 
   return (
-    <div 
+    <div
       className="min-h-screen relative"
       style={{
         backgroundImage: `linear-gradient(rgba(255, 241, 242, 0.8), rgba(255, 241, 242, 0.8)), url('https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&h=600')`,
@@ -23,17 +23,17 @@ export default function Schedule() {
     >
       <ConfettiBackground />
       <ConfettiBurst />
-      
+
       <NavigationBar currentPage="schedule" />
 
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-8 md:py-12">
 
 
 
 
         {/* Event Details Section */}
         <section className="mb-20">
-          <motion.div 
+          <motion.div
             className="max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -44,10 +44,10 @@ export default function Schedule() {
               {/* Decorative champagne glasses illustration */}
               <div className="absolute top-4 right-4 opacity-20">
                 <svg width="120" height="120" viewBox="0 0 120 120" className="text-rose-300">
-                  <path d="M30 40 L30 80 L35 85 L35 95 L25 95 L25 100 L35 100 L35 95 L45 95 L45 85 L50 80 L50 40 Z" fill="currentColor" stroke="currentColor" strokeWidth="1"/>
-                  <path d="M70 40 L70 80 L75 85 L75 95 L65 95 L65 100 L75 100 L75 95 L85 95 L85 85 L90 80 L90 40 Z" fill="currentColor" stroke="currentColor" strokeWidth="1"/>
-                  <path d="M25 35 L55 35" stroke="currentColor" strokeWidth="2" fill="none"/>
-                  <path d="M65 35 L95 35" stroke="currentColor" strokeWidth="2" fill="none"/>
+                  <path d="M30 40 L30 80 L35 85 L35 95 L25 95 L25 100 L35 100 L35 95 L45 95 L45 85 L50 80 L50 40 Z" fill="currentColor" stroke="currentColor" strokeWidth="1" />
+                  <path d="M70 40 L70 80 L75 85 L75 95 L65 95 L65 100 L75 100 L75 95 L85 95 L85 85 L90 80 L90 40 Z" fill="currentColor" stroke="currentColor" strokeWidth="1" />
+                  <path d="M25 35 L55 35" stroke="currentColor" strokeWidth="2" fill="none" />
+                  <path d="M65 35 L95 35" stroke="currentColor" strokeWidth="2" fill="none" />
                 </svg>
               </div>
 
@@ -61,11 +61,11 @@ export default function Schedule() {
                     WEDDING CEREMONY
                   </h2>
                 </div>
-                
+
                 <p className="text-[hsl(342,69%,29%)] mb-6 text-lg">
                   Join us as we take our vows. Please arrive 15 minutes early to be seated before the ceremony begins
                 </p>
-                
+
                 <hr className="border-[hsl(342,69%,29%)] mb-6" />
 
                 <div className="grid md:grid-cols-2 gap-8">
@@ -75,7 +75,7 @@ export default function Schedule() {
                     </div>
                     <div>
                       <h3 className="text-lg font-medium text-rose-400 mb-1">Date</h3>
-                      <p className="text-[hsl(342,69%,29%)] font-medium">2nd August 2025</p>
+                      <p className="text-[hsl(342,69%,29%)] font-medium">18th April 2026</p>
                     </div>
                   </div>
 
@@ -85,7 +85,7 @@ export default function Schedule() {
                     </div>
                     <div>
                       <h3 className="text-lg font-medium text-rose-400 mb-1">Time</h3>
-                      <p className="text-[hsl(342,69%,29%)] font-medium">11:00AM</p>
+                      <p className="text-[hsl(342,69%,29%)] font-medium">09:00AM</p>
                     </div>
                   </div>
 
@@ -122,11 +122,11 @@ export default function Schedule() {
                     RECEPTION CELEBRATION
                   </h2>
                 </div>
-                
+
                 <p className="text-[hsl(342,69%,29%)] mb-6 text-lg">
                   Join us as we celebrate our love.
                 </p>
-                
+
                 <hr className="border-[hsl(342,69%,29%)] mb-6" />
 
                 <div className="grid md:grid-cols-2 gap-8">
@@ -136,7 +136,7 @@ export default function Schedule() {
                     </div>
                     <div>
                       <h3 className="text-lg font-medium text-rose-400 mb-1">Date</h3>
-                      <p className="text-[hsl(342,69%,29%)] font-medium">2nd August 2025</p>
+                      <p className="text-[hsl(342,69%,29%)] font-medium">18th April 2026</p>
                     </div>
                   </div>
 
@@ -176,7 +176,7 @@ export default function Schedule() {
           </motion.div>
         </section>
       </div>
-      
+
       <Footer />
     </div>
   );

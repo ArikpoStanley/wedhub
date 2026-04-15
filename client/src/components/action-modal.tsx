@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
-import { MapPin, Grid3X3, Calendar, Download } from "lucide-react";
+import { MapPin, Calendar, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import TableNumberModal from "./table-number-modal";
 
 interface ActionModalProps {
   isOpen: boolean;
@@ -11,8 +9,7 @@ interface ActionModalProps {
 }
 
 export default function ActionModal({ isOpen, onClose, onItemClicked }: ActionModalProps) {
-  const [isTableModalOpen, setIsTableModalOpen] = useState(false);
-  
+
   const actions = [
     {
       icon: <MapPin className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />,
@@ -28,15 +25,6 @@ export default function ActionModal({ isOpen, onClose, onItemClicked }: ActionMo
       }
     },
     {
-      icon: <Grid3X3 className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />,
-      text: "Check Table Number",
-      onClick: () => {
-        setIsTableModalOpen(true);
-        onClose();
-        onItemClicked?.();
-      }
-    },
-    {
       icon: <Calendar className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />,
       text: "Add to Google Calendar",
       onClick: () => {
@@ -47,9 +35,9 @@ export default function ActionModal({ isOpen, onClose, onItemClicked }: ActionMo
           details: "Join us for our special day! Wedding ceremony and reception at Aquila Events Hub, Ikorodu, Lagos State, Nigeria.",
           location: "Aquila Events Hub, Ikorodu, Lagos State, Nigeria"
         };
-        
+
         const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventDetails.text)}&dates=${eventDetails.dates}&details=${encodeURIComponent(eventDetails.details)}&location=${encodeURIComponent(eventDetails.location)}`;
-        
+
         window.open(googleCalendarUrl, '_blank');
         onClose();
         onItemClicked?.();
@@ -62,7 +50,7 @@ export default function ActionModal({ isOpen, onClose, onItemClicked }: ActionMo
         // Download Order of Service from Google Drive
         const fileId = "1_c7gTlugswAYj9HPNCZiBvrki6JyOLeR";
         const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-        
+
         // Create a temporary link element to trigger download
         const link = document.createElement('a');
         link.href = downloadUrl;
@@ -71,7 +59,7 @@ export default function ActionModal({ isOpen, onClose, onItemClicked }: ActionMo
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        
+
         onClose();
         onItemClicked?.();
       }
@@ -81,7 +69,7 @@ export default function ActionModal({ isOpen, onClose, onItemClicked }: ActionMo
   return (
     <>
       <motion.div
-        className="fixed inset-0 z-[100] flex items-center justify-center mb-20 p-3 sm:p-4 md:p-6"
+        className="fixed inset-0 z-[100] flex items-end justify-center pb-24 md:pb-20 lg:pb-24 px-3 sm:px-4 md:px-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: isOpen ? 1 : 0 }}
         exit={{ opacity: 0 }}
@@ -89,11 +77,11 @@ export default function ActionModal({ isOpen, onClose, onItemClicked }: ActionMo
         style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
       >
         {/* Backdrop */}
-        <div 
+        <div
           // className="fixed inset-0 bg-black/20 backdrop-blur-sm"
           onClick={onClose}
         />
-        
+
         {/* Modal Content */}
         <motion.div
           className="relative z-10 bg-white rounded-2xl sm:rounded-3xl shadow-xl w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg overflow-hidden"
@@ -118,12 +106,6 @@ export default function ActionModal({ isOpen, onClose, onItemClicked }: ActionMo
           </div>
         </motion.div>
       </motion.div>
-      
-      {/* Table Number Modal */}
-      <TableNumberModal
-        isOpen={isTableModalOpen}
-        onClose={() => setIsTableModalOpen(false)}
-      />
     </>
   );
 } 

@@ -71,7 +71,7 @@ export default function Gallery() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-6xl md:text-8xl font-script text-[hsl(342,69%,29%)] mb-8">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl font-script text-[hsl(342,69%,29%)] mb-8">
             Gallery
           </h1>
 

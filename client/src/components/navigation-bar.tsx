@@ -16,11 +16,10 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
 
   const navigationItems = [
     { label: "Home", href: "/" },
-    { label: "Our Story", href: "/our-story" },
+    // { label: "Our Story", href: "/our-story" },
     { label: "Gallery", href: "/gallery" },
     { label: "Registry", href: "/registry" },
-    { label: "Schedule", href: "/schedule" },
-    { label: "RSVP", href: "/rsvp" }
+    { label: "Schedule", href: "/schedule" }
   ];
 
   const handleNavigation = (href: string) => {
@@ -68,6 +67,7 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
               >
                 Home
               </button>
+              {/* Our Story hidden
               <button 
                 onClick={() => navigate("/our-story")}
                 className={`font-script font-medium transition-colors text-xl ${
@@ -78,6 +78,7 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
               >
                 Our Story
               </button>
+              */}
               <button 
                 onClick={() => navigate("/gallery")}
                 className={`font-script font-medium transition-colors text-xl ${
@@ -125,16 +126,7 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
                 >
                   Schedule
                 </button>
-                <button 
-                  onClick={() => navigate("/rsvp")}
-                  className={`font-script font-medium transition-colors text-xl ${
-                    isCurrentPage("rsvp") 
-                      ? "text-[#800000] border border-[#800000] px-3 py-1 rounded"
-                      : "text-[#800000] hover:text-[hsl(342,60%,40%)]"
-                  }`}
-                >
-                  RSVP
-                </button>
+
               </nav>
 
               {/* Mobile Menu Button */}

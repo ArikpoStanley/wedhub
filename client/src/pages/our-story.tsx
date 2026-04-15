@@ -17,11 +17,11 @@ export default function OurStory() {
       question: "How Did You First Meet?",
       answers: [
         {
-          name: "Esther",
+          name: "Mymee",
           text: "We met on LinkedIn in 2019. I invited him to a business meeting as a prospective client for the company I was working with at the time"
         },
         {
-          name: "Basil",
+          name: "David",
           text: "We met on LinkedIn as professionals for a business meeting."
         }
       ]
@@ -30,11 +30,11 @@ export default function OurStory() {
       question: "Tell us about your first date",
       answers: [
         {
-          name: "Esther",
+          name: "Mymee",
           text: "We met at the cinema for 'A Wrinkle in Time'. I remember being so nervous but also excited. The movie was good, but I was more focused on getting to know him better. We had dinner afterwards and talked for hours about everything and nothing."
         },
         {
-          name: "Basil",
+          name: "David",
           text: "I was trying so hard to be cool and composed, but she had this way of making me feel completely at ease. By the end of the night, I knew there was something special about her. The way she laughed, her perspectives on life - everything just clicked."
         }
       ]
@@ -43,11 +43,11 @@ export default function OurStory() {
       question: "When did you know this was 'the one'?",
       answers: [
         {
-          name: "Esther",
+          name: "Mymee",
           text: "I think it was during one of our late-night calls when he was comforting me through a difficult time. The way he listened, understood, and supported me without judgment made me realize he was someone I could trust with my whole heart."
         },
         {
-          name: "Basil",
+          name: "David",
           text: "I knew she was the one, when the witness in my heart became clear."
         }
       ]
@@ -110,10 +110,10 @@ export default function OurStory() {
             <p className="text-xl font-script text-[hsl(342,69%,29%)]">
               Celebrating love in its purest form
             </p>
-            <h1 className="text-3xl lg:text-5xl font-bold text-[hsl(342,69%,29%)]">
+            <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-[hsl(342,69%,29%)]">
               FROM LINKEDIN CONNECTION
             </h1>
-            <h2 className="text-4xl lg:text-6xl font-bold text-pink-400">
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-pink-400">
               TO CONVICTION
             </h2>
           </div>

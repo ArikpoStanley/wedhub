@@ -41,10 +41,9 @@ export default function Home() {
 
   const navigationItems = [
     { label: "Home", href: "home" },
-    { label: "Our Story", href: "our-story" },
+    // { label: "Our Story", href: "our-story" },
     { label: "Gallery", href: "gallery" },
     { label: "Registry", href: "registry" },
-    { label: "RSVP", href: "rsvp" },
     { label: "Schedule", href: "schedule" },
   ];
 
@@ -93,7 +92,7 @@ export default function Home() {
       {/* Hero Section */}
       <section
         id="home"
-        className="h-auto flex flex-col justify-start items-center text-center px-4 pt-42 relative"
+        className="h-auto flex flex-col justify-start items-center text-center px-4 pt-32 md:pt-40 relative"
       >
         {/* Floating hearts decoration */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -137,7 +136,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <CountdownTimer targetDate="2025-10-02T00:00:00" />
+          <CountdownTimer targetDate="2026-04-18T00:00:00" />
         </motion.div>
 
         {/* Heart Icon */}
@@ -168,8 +167,8 @@ export default function Home() {
           </h1>
 
           {/* Couple Names */}
-          <div className="text-4xl md:text-5xl font-script text-[#800000] mt-4 mb-8">
-            Esther & Basil
+          <div className="text-3xl sm:text-4xl md:text-5xl font-script text-[#800000] mt-4 mb-8">
+            Mymee & David
           </div>
         </motion.div>
       </section>
@@ -224,7 +223,7 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif text-[#800000] leading-tight uppercase tracking-wide">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif text-[#800000] leading-tight uppercase tracking-wide">
                 OUR JOURNEY IS A{" "}
                 <span className="text-[hsl(332,51%,70%)]">
                   BEAUTIFUL TAPESTRY,
@@ -232,7 +231,7 @@ export default function Home() {
                 CAREFULLY{" "}
                 <span className="text-[hsl(332,51%,70%)]">WOVEN BY GOD</span>
               </h2>
-              <p className="text-2xl md:text-3xl lg:text-4xl text-[#800000] leading-relaxed max-w-4xl mx-auto uppercase tracking-wide font-medium">
+              <p className="text-base md:text-xl lg:text-2xl text-[#800000] leading-relaxed max-w-4xl mx-auto uppercase tracking-wide font-medium mt-6">
                 — EVERY BEAUTIFUL MOMENT, EVERY STEP FROM THE START, HIS HAND
                 HAS GUIDED US,{" "}
                 <span className="text-[hsl(332,51%,70%)]">
@@ -274,7 +273,7 @@ export default function Home() {
                     <div className="absolute inset-8 bg-amber-50 rounded-t-[40%] rounded-b-md overflow-hidden">
                       <img
                         src={weddingPhotos[0].src}
-                        alt="Esther & Basil"
+                        alt="Mymee & David"
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -294,13 +293,13 @@ export default function Home() {
                 <div className="text-[#800000] text-2xl mb-4">💍</div>
 
                 <h3 className="text-3xl font-script text-[#800000]">
-                  Esther & Basil
+                  Mymee & David
                 </h3>
                 <h4 className="text-xl font-serif text-gray-800">
                   Two hearts. One divine journey.
                 </h4>
                 <p className="text-gray-700 leading-relaxed">
-                  Esther and Basil are proof that when love is led by faith, it
+                  Mymee and David are proof that when love is led by faith, it
                   becomes something extraordinary. From the moment their paths
                   crossed, it was clear that God was writing a story bigger than
                   either of them imagined.
@@ -346,18 +345,18 @@ export default function Home() {
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[500px]">
             {/* Left side - Text content */}
-            <div className="text-left">
-              <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+            <div className="text-center lg:text-left">
+              <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight max-w-full break-words">
                 <div>WE WANT TO</div>
                 <div>SHARE THIS</div>
                 <div>PRECIOUS</div>
                 <div>MOMENT WITH</div>
                 <div>YOU</div>
               </h2>
-              <p className="text-xl text-white mb-8 max-w-lg leading-relaxed">
+              <p className="text-lg md:text-xl text-white mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
                 Join us as we say "I do" and begin this beautiful new chapter
-                together. We can't wait for you to celebrate with us on August
-                2nd, 2025!
+                together. We can't wait for you to celebrate with us on April
+                18th, 2026!
               </p>
             </div>
 
@@ -551,9 +550,6 @@ export default function Home() {
             <span className="text-[hsl(332,51%,70%)]">|</span>
             <span className="hidden md:inline">Get Direction</span>
             <span className="sm:inline md:hidden">Direction</span>
-            <span className="text-[hsl(332,51%,70%)]">|</span>
-            <span className="hidden lg:inline">Check Table No.</span>
-            <span className="sm:inline lg:hidden">Table</span>
           </div>
         </div>
 
