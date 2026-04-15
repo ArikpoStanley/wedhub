@@ -15,10 +15,8 @@ export default function ActionModal({ isOpen, onClose, onItemClicked }: ActionMo
       icon: <MapPin className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />,
       text: "Get Direction",
       onClick: () => {
-        // Open Google Maps in new tab
-        const address = "Aquila Events Hub, Ikorodu, Lagos State, Nigeria";
-        const encodedAddress = encodeURIComponent(address);
-        const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+        // Open Google Maps place link in new tab
+        const googleMapsUrl = "https://www.google.com/maps/place/Ikot+Obioko+534104,+Akwa+Ibom/@4.6879162,7.6929476,16z/data=!3m1!4b1!4m6!3m5!1s0x10680caa7fd78e0f:0xa9de125d2d80a7cc!8m2!3d4.6859971!4d7.6961914!16s%2Fg%2F11rc00klcd?entry=ttu&g_ep=EgoyMDI2MDQxMi4wIKXMDSoASAFQAw%3D%3D";
         window.open(googleMapsUrl, '_blank');
         onClose();
         onItemClicked?.();
