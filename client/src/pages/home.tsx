@@ -481,7 +481,15 @@ export default function Home() {
           <div
             className="bg-[#800000] text-white py-2 md:py-3 px-4 md:px-6 rounded-full shadow-lg cursor-pointer"
             onClick={() => {
-              setIsActionModalOpen(true);
+              const isMobileViewport =
+                typeof window !== "undefined" &&
+                window.matchMedia("(max-width: 767px)").matches;
+
+              if (isMobileViewport) {
+                setIsActionModalOpen((prev) => !prev);
+              } else {
+                setIsActionModalOpen(true);
+              }
               setIsModalDisabled(false);
             }}
           >
