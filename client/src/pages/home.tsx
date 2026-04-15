@@ -464,7 +464,7 @@ export default function Home() {
 
       {/* Bottom Action Bar with Modal */}
       <div
-        className="fixed bottom-12 md:bottom-4 lg:bottom-10 left-1/2 transform -translate-x-1/2 z-30 w-full px-4"
+        className="fixed bottom-12 md:bottom-4 lg:bottom-10 left-0 right-0 z-30 px-4"
         onMouseEnter={() => {
           if (!isModalDisabled && hoverTimeout) clearTimeout(hoverTimeout);
           if (!isModalDisabled) setIsActionModalOpen(true);
@@ -477,22 +477,24 @@ export default function Home() {
         }}
       >
         {/* Action Bar */}
-        <div
-          className="bg-[#800000] text-white py-2 md:py-3 px-4 md:px-6 rounded-full shadow-lg cursor-pointer max-w-md mx-auto"
-          onClick={() => {
-            setIsActionModalOpen(true);
-            setIsModalDisabled(false);
-          }}
-        >
-          <div className="flex justify-center space-x-1 md:space-x-2 text-xs md:text-sm">
-            <span className="hidden sm:inline">Programme</span>
-            <span className="sm:hidden">Prog</span>
-            <span className="text-[hsl(332,51%,70%)]">|</span>
-            <span className="hidden sm:inline">Calendar</span>
-            <span className="sm:hidden">Cal</span>
-            <span className="text-[hsl(332,51%,70%)]">|</span>
-            <span className="hidden md:inline">Get Direction</span>
-            <span className="sm:inline md:hidden">Direction</span>
+        <div className="mx-auto w-full max-w-md">
+          <div
+            className="bg-[#800000] text-white py-2 md:py-3 px-4 md:px-6 rounded-full shadow-lg cursor-pointer"
+            onClick={() => {
+              setIsActionModalOpen(true);
+              setIsModalDisabled(false);
+            }}
+          >
+            <div className="flex w-full min-w-0 items-center justify-center gap-x-1 md:gap-x-2 text-xs md:text-sm text-center">
+              <span className="hidden sm:inline">Programme</span>
+              <span className="sm:hidden">Prog</span>
+              <span className="text-[hsl(332,51%,70%)]">|</span>
+              <span className="hidden sm:inline">Calendar</span>
+              <span className="sm:hidden">Cal</span>
+              <span className="text-[hsl(332,51%,70%)]">|</span>
+              <span className="hidden md:inline">Get Direction</span>
+              <span className="sm:inline md:hidden">Direction</span>
+            </div>
           </div>
         </div>
 
