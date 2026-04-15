@@ -174,7 +174,7 @@ export default function Home() {
       <section id="gallery" className="bg-white overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div
-            className="flex space-x-6 overflow-x-auto touch-pan-x md:overflow-visible md:animate-scroll pb-2 md:pb-0"
+            className="flex space-x-6 animate-scroll"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
