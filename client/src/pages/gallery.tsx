@@ -19,11 +19,11 @@ export default function Gallery() {
       alt: "David in traditional attire"
     },
     {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776227687/DSC_8756_bbieof.jpg",
+      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776310781/lv_0_20260415184705_tqnujf.jpg",
       alt: "Mymee and David together"
     },
     {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776227680/DSC_8775_ta3pbs.jpg",
+      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776310778/lv_0_20260415190505_b0r0d4.jpg",
       alt: "Couple portrait"
     },
     {
