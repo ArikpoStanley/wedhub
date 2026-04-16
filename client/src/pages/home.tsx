@@ -73,7 +73,13 @@ export default function Home() {
       alt: "Pre-wedding pictures",
     },
   ];
-  const carouselPhotos = [...weddingPhotos.slice(2), ...weddingPhotos.slice(0, 2)];
+  const carouselExcludedSrcs = new Set([
+    "https://res.cloudinary.com/dycukxm7r/image/upload/v1776310781/lv_0_20260415184705_tqnujf.jpg",
+    "https://res.cloudinary.com/dycukxm7r/image/upload/v1776310778/lv_0_20260415190505_b0r0d4.jpg",
+  ]);
+  const carouselPhotos = weddingPhotos.filter(
+    (p) => !carouselExcludedSrcs.has(p.src),
+  );
   const loopingCarouselPhotos = [...carouselPhotos, ...carouselPhotos];
 
   return (
