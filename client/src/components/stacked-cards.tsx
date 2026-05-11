@@ -20,12 +20,8 @@ export default function StackedCards({ cards, className = "" }: StackedCardsProp
   return (
     <div ref={containerRef} className={`relative ${className}`}>
       {cards.map((card, index) => {
-        const cardRef = useRef<HTMLDivElement>(null);
-        // Remove scroll-based transform to let sticky positioning work naturally
-
         return (
           <motion.div
-            ref={cardRef}
             key={card.id}
             className="relative mb-8 md:mb-12 flex items-start gap-6"
             style={{ 
@@ -41,13 +37,13 @@ export default function StackedCards({ cards, className = "" }: StackedCardsProp
               ease: "easeOut"
             }}
             viewport={{ 
-              once: true, 
+              once: false, 
               margin: "-100px 0px -200px 0px" 
             }}
           >
             {/* Decorative icon on the left */}
             <div className="flex-shrink-0 mt-4">
-              <div className="w-8 h-8 bg-[#800000] rounded-full flex items-center justify-center">
+              <div className="w-8 h-8 bg-[var(--w-primary)] rounded-full flex items-center justify-center">
                 <span className="text-white text-sm">❤️</span>
               </div>
             </div>
@@ -60,7 +56,7 @@ export default function StackedCards({ cards, className = "" }: StackedCardsProp
                 ${card.backgroundColor || "bg-white/80"}
               `}
             >
-              <h3 className="text-2xl md:text-3xl font-serif text-[#800000] mb-6 text-center">
+              <h3 className="text-2xl md:text-3xl font-serif text-[var(--w-primary)] mb-6 text-center">
                 {card.title}
               </h3>
               <div className="text-gray-700 leading-relaxed">

@@ -1,9 +1,20 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Menu } from "lucide-react";
+import { Heart, Menu } from "lucide-react";
 import { useLocation } from "wouter";
 import MobileMenu from "@/components/mobile-menu";
 import confetti from "canvas-confetti";
+import { useWeddingSiteOptional } from "@/context/site-context";
+import { resolveHomeHeroBackgroundImageUrl } from "@shared/resolve-home-hero";
+
+/** Decorative wedding rings (from `client/public/`); flanks the centre avatar. */
+const NAV_RING_DECORATION_SRC = "/s-l1600-removebg-preview.png";
+
+function resolveNavPath(pathPrefix: string, href: string): string {
+  if (!pathPrefix) return href;
+  if (href === "/") return pathPrefix;
+  return `${pathPrefix}${href}`;
+}
 
 interface NavigationBarProps {
   currentPage?: string;
@@ -13,6 +24,9 @@ interface NavigationBarProps {
 export default function NavigationBar({ currentPage, showBackButton = false }: NavigationBarProps) {
   const [, navigate] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const siteCtx = useWeddingSiteOptional();
+  const pathPrefix = siteCtx?.pathPrefix ?? "";
+  const logoUrl = resolveHomeHeroBackgroundImageUrl(siteCtx?.site?.content) ?? null;
 
   const navigationItems = [
     { label: "Home", href: "/" },
@@ -23,7 +37,7 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
   ];
 
   const handleNavigation = (href: string) => {
-    navigate(href);
+    navigate(resolveNavPath(pathPrefix, href));
     setIsMobileMenuOpen(false);
   };
 
@@ -52,16 +66,17 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
 
   return (
     <>
-      <header className="bg-rose-50/90 backdrop-blur-md py-6 sticky top-0 z-40">
+      <header className="bg-[var(--w-bg)]/90 backdrop-blur-md py-6 sticky top-0 z-40">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between">
-            {/* Left Navigation Items */}
+          <div className="flex w-full items-center gap-2">
+            {/* Left: nav (desktop) — flex-1 keeps the centre cluster visually centred */}
+            <div className="flex min-w-0 flex-1 justify-start">
             <nav className="hidden lg:flex space-x-8">
               <button
-                onClick={() => navigate("/")}
+                onClick={() => navigate(resolveNavPath(pathPrefix, "/"))}
                 className={`font-script font-medium transition-colors text-lg ${isCurrentPage("home")
-                    ? "text-[#800000] border border-[#800000] px-3 py-1 rounded"
-                    : "text-[#800000] hover:text-[hsl(342,60%,40%)]"
+                    ? "text-[var(--w-primary)] border border-[var(--w-primary)] px-3 py-1 rounded"
+                    : "text-[var(--w-primary)] hover:text-[var(--w-primary-hover)]"
                   }`}
               >
                 Home
@@ -71,53 +86,85 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
                 onClick={() => navigate("/our-story")}
                 className={`font-script font-medium transition-colors text-xl ${
                   isCurrentPage("our-story") 
-                    ? "text-[#800000] border border-[#800000] px-3 py-1 rounded"
-                    : "text-[#800000] hover:text-[hsl(342,60%,40%)]"
+                    ? "text-[var(--w-primary)] border border-[var(--w-primary)] px-3 py-1 rounded"
+                    : "text-[var(--w-primary)] hover:text-[var(--w-primary-hover)]"
                 }`}
               >
                 Our Story
               </button>
               */}
               <button
-                onClick={() => navigate("/gallery")}
+                onClick={() => navigate(resolveNavPath(pathPrefix, "/gallery"))}
                 className={`font-script font-medium transition-colors text-xl ${isCurrentPage("gallery")
-                    ? "text-[#800000] border border-[#800000] px-3 py-1 rounded"
-                    : "text-[#800000] hover:text-[hsl(342,60%,40%)]"
+                    ? "text-[var(--w-primary)] border border-[var(--w-primary)] px-3 py-1 rounded"
+                    : "text-[var(--w-primary)] hover:text-[var(--w-primary-hover)]"
                   }`}
               >
                 Gallery
               </button>
             </nav>
-
-            {/* Center Logo */}
-            <div className="flex flex-col items-center">
-              <div className="relative">
-                <img
-                  src="https://res.cloudinary.com/dycukxm7r/image/upload/v1776229630/MD-removebg-preview_yz3rat.png"
-                  alt="Mymee & David wedding logo"
-                  className="w-8 h-8 md:w-16 md:h-16 object-contain cursor-pointer hover:scale-105 hover:rotate-360 transition-transform duration-700"
-                  onClick={handleLogoClick}
-                />
-              </div>
             </div>
 
-            {/* Right Navigation Items */}
-            <div className="flex items-center space-x-6">
+            {/* Centre: rings + logo + rings (rings hidden on very narrow screens) */}
+            <div className="flex shrink-0 items-center gap-1.5 sm:gap-2 md:gap-2.5">
+              <img
+                src={NAV_RING_DECORATION_SRC}
+                alt=""
+                width={56}
+                height={56}
+                decoding="async"
+                className="pointer-events-none hidden h-8 w-8 select-none object-contain opacity-90 sm:block sm:h-9 sm:w-9 md:h-12 md:w-12"
+                aria-hidden
+              />
+              <div className="flex flex-col items-center">
+                <div className="relative">
+                  {logoUrl ? (
+                    <img
+                      src={logoUrl}
+                      alt=""
+                      className="h-8 w-8 cursor-pointer rounded-full object-contain transition-transform duration-700 hover:scale-105 hover:rotate-360 md:h-16 md:w-16"
+                      onClick={handleLogoClick}
+                    />
+                  ) : (
+                    <button
+                      type="button"
+                      aria-label="Celebration"
+                      className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-2 border-[var(--w-border-soft)] bg-[var(--w-primary)] text-white transition-transform duration-300 hover:scale-105 md:h-16 md:w-16"
+                      onClick={handleLogoClick}
+                    >
+                      <Heart className="h-4 w-4 fill-current md:h-8 md:w-8" />
+                    </button>
+                  )}
+                </div>
+              </div>
+              <img
+                src={NAV_RING_DECORATION_SRC}
+                alt=""
+                width={56}
+                height={56}
+                decoding="async"
+                className="pointer-events-none hidden h-8 w-8 select-none object-contain opacity-90 sm:block sm:h-9 sm:w-9 md:h-12 md:w-12 [transform:scaleX(-1)]"
+                aria-hidden
+              />
+            </div>
+
+            {/* Right: nav + menu */}
+            <div className="flex min-w-0 flex-1 items-center justify-end space-x-6">
               <nav className="hidden lg:flex space-x-8">
                 <button
-                  onClick={() => navigate("/registry")}
+                  onClick={() => navigate(resolveNavPath(pathPrefix, "/registry"))}
                   className={`font-script font-medium transition-colors text-xl ${isCurrentPage("registry")
-                      ? "text-[#800000] border border-[#800000] px-3 py-1 rounded"
-                      : "text-[#800000] hover:text-[hsl(342,60%,40%)]"
+                      ? "text-[var(--w-primary)] border border-[var(--w-primary)] px-3 py-1 rounded"
+                      : "text-[var(--w-primary)] hover:text-[var(--w-primary-hover)]"
                     }`}
                 >
                   Registry
                 </button>
                 <button
-                  onClick={() => navigate("/schedule")}
+                  onClick={() => navigate(resolveNavPath(pathPrefix, "/schedule"))}
                   className={`font-script font-medium transition-colors text-xl ${isCurrentPage("schedule")
-                      ? "text-[#800000] border border-[#800000] px-3 py-1 rounded"
-                      : "text-[#800000] hover:text-[hsl(342,60%,40%)]"
+                      ? "text-[var(--w-primary)] border border-[var(--w-primary)] px-3 py-1 rounded"
+                      : "text-[var(--w-primary)] hover:text-[var(--w-primary-hover)]"
                     }`}
                 >
                   Schedule
@@ -129,7 +176,7 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
               <Button
                 variant="ghost"
                 size="icon"
-                className="lg:hidden text-[#800000] hover:text-[hsl(342,60%,40%)] p-3 bg-pink-200 hover:bg-pink-300 rounded-lg"
+                className="lg:hidden text-[var(--w-primary)] hover:text-[var(--w-primary-hover)] p-3 bg-[var(--w-border-soft)] hover:opacity-90 rounded-lg"
                 onClick={() => setIsMobileMenuOpen(true)}
               >
                 <Menu className="h-8 w-8" />
@@ -139,7 +186,7 @@ export default function NavigationBar({ currentPage, showBackButton = false }: N
         </div>
 
         {/* Decorative line below navigation */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-[#800000] to-transparent mt-4"></div>
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-[var(--w-primary)] to-transparent mt-4"></div>
       </header>
 
       {/* Mobile Menu */}

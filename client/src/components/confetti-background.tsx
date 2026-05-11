@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { weddingEffectColors } from "@/lib/effect-palette";
 
 interface ConfettiParticle {
   id: number;
@@ -14,7 +15,7 @@ export default function ConfettiBackground() {
   const [particles, setParticles] = useState<ConfettiParticle[]>([]);
 
   useEffect(() => {
-    const colors = ['#f472b6', '#ec4899', '#db2777', '#be185d'];
+    const colors = weddingEffectColors();
     
     const createConfetti = () => {
       const newParticles: ConfettiParticle[] = [];

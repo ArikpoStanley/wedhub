@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { ScrollFade } from "@/components/scroll-fade";
 import { Heart, ArrowLeft, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -82,10 +82,15 @@ export default function OurStory() {
     }
   ];
 
-  const cardColors = ["bg-pink-200", "bg-pink-100", "bg-rose-100", "bg-rose-200"];
+  const cardColors = [
+    "bg-[color-mix(in_srgb,var(--w-primary)_12%,var(--w-bg))]",
+    "bg-[var(--w-border-soft)]",
+    "bg-[color-mix(in_srgb,var(--w-accent)_22%,var(--w-bg))]",
+    "bg-[color-mix(in_srgb,var(--w-accent)_12%,white)]",
+  ];
 
   return (
-    <div className="min-h-screen bg-rose-50 relative">
+    <div className="min-h-screen bg-[var(--w-bg)] relative">
       <ConfettiBackground />
       <ConfettiBurst />
       
@@ -93,27 +98,26 @@ export default function OurStory() {
 
       <div className="container mx-auto px-4 pb-12">
         {/* Hero Banner */}
-        <motion.div 
-          className="flex flex-col lg:flex-row items-center gap-6 mb-12 bg-gradient-to-r from-rose-50 to-pink-50 rounded-2xl pt-4 pb-6 lg:pt-6 lg:pb-8 px-8 lg:px-12"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+        <ScrollFade
+          className="mb-12 flex flex-col items-center gap-6 rounded-2xl bg-gradient-to-r from-[var(--w-bg)] to-[color-mix(in_srgb,var(--w-accent)_18%,var(--w-bg))] px-8 pb-6 pt-4 lg:flex-row lg:px-12 lg:pb-8 lg:pt-6"
+          y={28}
+          duration={0.72}
         >
           {/* Left Text Section */}
           <div className="flex-1 text-left space-y-4">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 bg-[hsl(342,69%,29%)] rounded-full flex items-center justify-center">
+              <div className="w-8 h-8 bg-[var(--w-primary)] rounded-full flex items-center justify-center">
                 <span className="text-white text-sm">❤️</span>
               </div>
-              <span className="text-sm text-[hsl(342,69%,29%)]">❤️</span>
+              <span className="text-sm text-[var(--w-primary)]">❤️</span>
             </div>
-            <p className="text-xl font-script text-[hsl(342,69%,29%)]">
+            <p className="text-xl font-script text-[var(--w-primary)]">
               Celebrating love in its purest form
             </p>
-            <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-[hsl(342,69%,29%)]">
+            <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-[var(--w-primary)]">
               FROM LINKEDIN CONNECTION
             </h1>
-            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-pink-400">
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-[var(--w-accent)]">
               TO CONVICTION
             </h2>
           </div>
@@ -122,19 +126,14 @@ export default function OurStory() {
           <div className="flex-1">
             <PhotoPanels photos={galleryPhotos} />
           </div>
-        </motion.div>
+        </ScrollFade>
 
         {/* Decorative Heart */}
-        <motion.div 
-          className="flex justify-center mb-12"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-        >
-          <div className="w-16 h-16 bg-[hsl(342,69%,29%)] rounded-full flex items-center justify-center">
-            <Heart className="text-white text-2xl fill-current" />
+        <ScrollFade className="mb-12 flex justify-center" fadeOnly duration={0.55}>
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[var(--w-primary)]">
+            <Heart className="text-2xl fill-current text-white" />
           </div>
-        </motion.div>
+        </ScrollFade>
 
         {/* Q&A Section */}
         <StackedCards
@@ -146,7 +145,7 @@ export default function OurStory() {
               <div className="space-y-4">
                 {item.answers.map((answer, answerIndex) => (
                   <div key={answerIndex} className="mb-6">
-                    <div className="inline-block bg-[#800000] text-white px-4 py-2 rounded-lg mb-3">
+                    <div className="inline-block bg-[var(--w-primary)] text-white px-4 py-2 rounded-lg mb-3">
                       <span className="font-script text-sm font-bold">
                         {answer.name}
                       </span>
@@ -163,20 +162,14 @@ export default function OurStory() {
         />
 
         {/* Closing Message */}
-        <motion.div 
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
+        <ScrollFade className="mt-16 text-center" y={26} duration={0.7}>
           <Card className="p-8 bg-white/80 backdrop-blur-sm border-0 shadow-lg max-w-3xl mx-auto">
             <div className="flex justify-center mb-6">
-              <div className="w-16 h-16 bg-[hsl(342,69%,29%)] rounded-full flex items-center justify-center">
+              <div className="w-16 h-16 bg-[var(--w-primary)] rounded-full flex items-center justify-center">
                 <Heart className="text-white text-2xl fill-current" />
               </div>
             </div>
-            <h3 className="text-3xl font-serif text-[hsl(342,69%,29%)] mb-6">
+            <h3 className="text-3xl font-serif text-[var(--w-primary)] mb-6">
               Our Journey Continues...
             </h3>
             <p className="text-lg text-gray-700 leading-relaxed">
@@ -184,7 +177,7 @@ export default function OurStory() {
               We're excited to begin this new chapter together and grateful to have you witness our union.
             </p>
           </Card>
-        </motion.div>
+        </ScrollFade>
       </div>
       
       <Footer />

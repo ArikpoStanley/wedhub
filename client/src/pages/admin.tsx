@@ -1,18 +1,25 @@
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import NavigationBar from "@/components/navigation-bar";
 import Footer from "@/components/footer";
 import { weddingApi } from "@/services/wedding-api";
+import { useAuth } from "@/context/auth-context";
 import type { RSVP, Guest } from "@shared/wedding-schema";
+import type { SiteRecord } from "@shared/site-schema";
 
 export default function Admin() {
+  const [, navigate] = useLocation();
+  const { user, logout } = useAuth();
   const [rsvps, setRsvps] = useState<RSVP[]>([]);
   const [guests, setGuests] = useState<Guest[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [activeTab, setActiveTab] = useState<"rsvps" | "guests">("rsvps");
+  const [noSites, setNoSites] = useState(false);
+  const [site, setSite] = useState<SiteRecord | null>(null);
 
   useEffect(() => {
     loadData();
@@ -21,15 +28,26 @@ export default function Admin() {
   const loadData = async () => {
     try {
       setLoading(true);
+      setNoSites(false);
+      const sitesRes = await weddingApi.listSites();
+      const first = sitesRes.success && sitesRes.data?.length ? sitesRes.data[0] : null;
+      if (!first) {
+        setNoSites(true);
+        setSite(null);
+        setRsvps([]);
+        setGuests([]);
+        return;
+      }
+      setSite(first);
       const [rsvpResponse, guestResponse] = await Promise.all([
-        weddingApi.getAllRSVPs(),
-        weddingApi.getAllGuests(),
+        weddingApi.getAllRSVPs({ siteId: first._id }),
+        weddingApi.getAllGuests({ siteId: first._id }),
       ]);
 
-      if (rsvpResponse.success) {
+      if (rsvpResponse.success && rsvpResponse.data) {
         setRsvps(rsvpResponse.data);
       }
-      if (guestResponse.success) {
+      if (guestResponse.success && guestResponse.data) {
         setGuests(guestResponse.data);
       }
     } catch (err) {
@@ -61,9 +79,70 @@ export default function Admin() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-4xl md:text-6xl font-serif text-[#800000] text-center mb-8">
-            Wedding Dashboard
-          </h1>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
+            <h1 className="text-4xl md:text-6xl font-serif text-[#800000] text-center">Wedding Dashboard</h1>
+            <div className="flex items-center gap-2 shrink-0">
+              {user ? (
+                <span className="text-xs text-gray-500 max-w-[12rem] truncate" title={user.email}>
+                  {user.email}
+                </span>
+              ) : null}
+              <Button asChild variant="outline" size="sm" className="text-[#800000] border-[#800000]">
+                <Link href="/admin/setup">Setup</Link>
+              </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="text-gray-600"
+                onClick={() => void logout().then(() => navigate("/"))}
+              >
+                Log out
+              </Button>
+            </div>
+          </div>
+
+          {noSites && (
+            <div className="bg-amber-50 border border-amber-200 text-amber-900 px-4 py-3 rounded-lg mb-6 text-center">
+              <p className="mb-3">No wedding site yet. Complete the guided setup first.</p>
+              <Button asChild className="bg-[#800000]">
+                <Link href="/admin/setup">Go to step-by-step setup</Link>
+              </Button>
+            </div>
+          )}
+
+          {site && !noSites ? (
+            <Card className="p-6 mb-8 max-w-2xl mx-auto text-left space-y-3">
+              <h2 className="text-xl font-serif text-[#800000]">Your wedding site</h2>
+              <ul className="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                <li>
+                  <strong>Guest URL:</strong>{" "}
+                  <code className="bg-rose-100 px-1 rounded">/w/{site.slug}</code>
+                </li>
+                <li>
+                  <strong>Status:</strong> {site.status} — edits in setup appear on the guest site right away.
+                </li>
+                <li>
+                  <strong>Partners:</strong> {site.partnerOneName ?? "—"} &amp; {site.partnerTwoName ?? "—"}
+                </li>
+                <li>
+                  <strong>Wedding date:</strong>{" "}
+                  {site.weddingDate ? new Date(site.weddingDate).toLocaleString() : "—"}
+                </li>
+                <li>
+                  <strong>Gallery photos:</strong> {site.content?.galleryImageUrls?.length ?? 0}
+                </li>
+              </ul>
+              <div className="flex flex-wrap gap-2 pt-2">
+                <Button asChild variant="outline" className="border-[#800000] text-[#800000]">
+                  <Link href="/admin/setup">Edit all website content</Link>
+                </Button>
+                <Button asChild className="bg-[#800000] text-white">
+                  <Link href={`/w/${site.slug}`}>View guest site</Link>
+                </Button>
+              </div>
+            </Card>
+          ) : null}
 
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6">

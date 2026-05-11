@@ -1,8 +1,10 @@
-import 'dotenv/config';
+import "./crypto-hash-polyfill";
+import "dotenv/config";
 import express, { type Request, Response, NextFunction } from "express";
+import session from "express-session";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
-import { closeMongoDB } from "./mongodb";
+import { disconnectMongoose } from "./mongoose-db";
 
 // Windows-specific environment setup
 if (process.platform === 'win32') {
@@ -14,16 +16,36 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+const sessionSecret = process.env.SESSION_SECRET || "dev-session-secret-change-me";
+if (process.env.NODE_ENV === "production" && sessionSecret.includes("dev-session")) {
+  console.warn("WARNING: Set SESSION_SECRET in production.");
+}
+
+app.use(
+  session({
+    name: "wedding.sid",
+    secret: sessionSecret,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+    },
+  }),
+);
+
 // Graceful shutdown
 process.on('SIGINT', async () => {
   console.log('Received SIGINT, shutting down gracefully...');
-  await closeMongoDB();
+  await disconnectMongoose();
   process.exit(0);
 });
 
 process.on('SIGTERM', async () => {
   console.log('Received SIGTERM, shutting down gracefully...');
-  await closeMongoDB();
+  await disconnectMongoose();
   process.exit(0);
 });
 
@@ -81,8 +103,10 @@ app.use((req, res, next) => {
   // Other ports are firewalled. Default to 5000 if not specified.
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
-  const port = parseInt(process.env.PORT || '5000', 10);
-  server.listen(port, "localhost", () => {
-    log(`serving on port ${port}`);
+  const port = parseInt(process.env.PORT || "5000", 10);
+  // Bind 0.0.0.0 so http://127.0.0.1:PORT and LAN URLs work; "localhost" alone can break fetch from 127.0.0.1.
+  const host = process.env.LISTEN_HOST || "0.0.0.0";
+  server.listen(port, host, () => {
+    log(`serving on http://localhost:${port} (bound ${host})`);
   });
 })();

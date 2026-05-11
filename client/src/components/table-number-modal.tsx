@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { X } from "lucide-react";
 import { weddingApi } from "@/services/wedding-api";
 import type { Contact } from "@shared/wedding-schema";
+import { useWeddingSiteOptional } from "@/context/site-context";
 
 interface TableNumberModalProps {
   isOpen: boolean;
@@ -12,6 +13,10 @@ interface TableNumberModalProps {
 }
 
 export default function TableNumberModal({ isOpen, onClose }: TableNumberModalProps) {
+  const siteCtx = useWeddingSiteOptional();
+  const siteScope =
+    siteCtx?.tenantSlug != null ? { slug: siteCtx.tenantSlug } : null;
+
   const [searchQuery, setSearchQuery] = useState("");
   const [foundContact, setFoundContact] = useState<Contact | null>(null);
   const [searchResult, setSearchResult] = useState<"found" | "not-found" | null>(null);
@@ -20,14 +25,19 @@ export default function TableNumberModal({ isOpen, onClose }: TableNumberModalPr
 
   const handleCheckName = async () => {
     if (!searchQuery.trim()) return;
-    
+
+    if (!siteScope) {
+      setError("Open your published wedding link (address includes /w/your-slug) to look up table numbers.");
+      return;
+    }
+
     setIsLoading(true);
     setError(null);
     setFoundContact(null);
     setSearchResult(null);
-    
+
     try {
-      const response = await weddingApi.searchContacts(searchQuery.trim());
+      const response = await weddingApi.searchContacts(searchQuery.trim(), siteScope);
       
       if (response.success && response.data && response.data.length > 0) {
         // If multiple matches, take the first one
@@ -93,7 +103,7 @@ export default function TableNumberModal({ isOpen, onClose }: TableNumberModalPr
         <div className="p-4 sm:p-6 md:p-8 lg:p-10">
           {/* Title */}
           <div className="text-center mb-6 sm:mb-8">
-            <h3 className="text-[hsl(342,69%,29%)] text-base sm:text-lg md:text-xl lg:text-2xl font-serif leading-relaxed px-1">
+            <h3 className="text-[var(--w-primary)] text-base sm:text-lg md:text-xl lg:text-2xl font-serif leading-relaxed px-1">
               Hello dear, kindly enter your name, email, or phone number to find your table number
             </h3>
           </div>
@@ -105,7 +115,7 @@ export default function TableNumberModal({ isOpen, onClose }: TableNumberModalPr
               placeholder="Enter your name, email, or phone"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full sm:flex-1 border-gray-300 focus:border-[hsl(342,69%,29%)] focus:ring-[hsl(342,69%,29%)] text-sm sm:text-base md:text-lg py-2.5 sm:py-3 md:py-3.5"
+              className="w-full sm:flex-1 border-gray-300 focus:border-[var(--w-primary)] focus:ring-[var(--w-primary)] text-sm sm:text-base md:text-lg py-2.5 sm:py-3 md:py-3.5"
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   handleCheckName();
@@ -115,7 +125,7 @@ export default function TableNumberModal({ isOpen, onClose }: TableNumberModalPr
             <Button
               onClick={handleCheckName}
               disabled={!searchQuery.trim() || isLoading}
-              className="w-full sm:w-auto bg-pink-100 text-[hsl(342,69%,29%)] hover:bg-pink-200 border border-pink-200 px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-3.5 text-sm sm:text-base md:text-lg font-medium whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full sm:w-auto bg-[var(--w-border-soft)] text-[var(--w-primary)] hover:bg-[color-mix(in_srgb,var(--w-accent)_25%,var(--w-bg))] border border-[var(--w-border-soft)] px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-3.5 text-sm sm:text-base md:text-lg font-medium whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? "Checking..." : "CHECK NAME"}
             </Button>
@@ -156,7 +166,7 @@ export default function TableNumberModal({ isOpen, onClose }: TableNumberModalPr
                   {foundContact.tableNumber ? (
                     <div>
                       <p className="text-gray-600 mb-2 sm:mb-3 text-sm sm:text-base md:text-lg">Your table number is:</p>
-                      <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-[hsl(342,69%,29%)] mb-2">
+                      <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-[var(--w-primary)] mb-2">
                         Table {foundContact.tableNumber}
                       </p>
                     </div>

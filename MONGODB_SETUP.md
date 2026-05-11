@@ -110,23 +110,18 @@ npm install --legacy-peer-deps
 npm run setup:windows
 ```
 
-### 4. Seed the Database (Optional)
-Populate the database with sample wedding events:
-```bash
-npm run db:seed
-```
-
-### 5. Start the Application
+### 4. Start the Application
 ```cmd
-# Full development mode (with database seeding)
 npm run dev
 
-# Clean development mode (without seeding, if MongoDB connection fails)
+# Same command (kept for older notes/scripts):
 npm run dev:clean
 
 # Windows users can also use:
 setup-windows.bat
 ```
+
+After the app is running, open `/admin/setup` in the browser to create and publish your wedding site. Nothing is inserted into the database automatically.
 
 ## Usage
 

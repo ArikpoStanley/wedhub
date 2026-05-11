@@ -3,6 +3,7 @@ import { z } from "zod";
 // RSVP Schema
 export const rsvpSchema = z.object({
   _id: z.string().optional(),
+  siteId: z.string().optional(),
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Valid email is required"),
   whatsappInvite: z.enum(["yes", "no"]),
@@ -15,11 +16,16 @@ export const rsvpSchema = z.object({
   updatedAt: z.date().default(() => new Date()),
 });
 
-export const createRSVPSchema = rsvpSchema.omit({ _id: true, createdAt: true, updatedAt: true });
+export const createRSVPSchema = rsvpSchema
+  .omit({ _id: true, createdAt: true, updatedAt: true })
+  .extend({
+    siteId: z.string().min(1, "siteId is required"),
+  });
 
 // Guest Schema
 export const guestSchema = z.object({
   _id: z.string().optional(),
+  siteId: z.string().optional(),
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Valid email is required").optional(),
   phone: z.string().optional(),
@@ -32,11 +38,16 @@ export const guestSchema = z.object({
   updatedAt: z.date().default(() => new Date()),
 });
 
-export const createGuestSchema = guestSchema.omit({ _id: true, createdAt: true, updatedAt: true });
+export const createGuestSchema = guestSchema
+  .omit({ _id: true, createdAt: true, updatedAt: true })
+  .extend({
+    siteId: z.string().min(1).optional(),
+  });
 
 // Wedding Event Schema
 export const weddingEventSchema = z.object({
   _id: z.string().optional(),
+  siteId: z.string().optional(),
   title: z.string().min(1, "Title is required"),
   description: z.string().optional(),
   date: z.date(),
@@ -57,7 +68,11 @@ export const weddingEventSchema = z.object({
   updatedAt: z.date().default(() => new Date()),
 });
 
-export const createWeddingEventSchema = weddingEventSchema.omit({ _id: true, createdAt: true, updatedAt: true });
+export const createWeddingEventSchema = weddingEventSchema
+  .omit({ _id: true, createdAt: true, updatedAt: true })
+  .extend({
+    siteId: z.string().min(1).optional(),
+  });
 
 // Type exports
 export type RSVP = z.infer<typeof rsvpSchema>;
@@ -94,6 +109,7 @@ export type WeddingEventsResponse = z.infer<typeof weddingEventsResponseSchema>;
 // Contact Schema
 export const contactSchema = z.object({
   _id: z.string().optional(),
+  siteId: z.string().optional(),
   fullName: z.string().min(1, "Full name is required"),
   email: z.string().email("Valid email is required"),
   phoneNumber: z.string().min(1, "Phone number is required"),
@@ -102,7 +118,11 @@ export const contactSchema = z.object({
   updatedAt: z.date().default(() => new Date()),
 });
 
-export const createContactSchema = contactSchema.omit({ _id: true, createdAt: true, updatedAt: true });
+export const createContactSchema = contactSchema
+  .omit({ _id: true, createdAt: true, updatedAt: true })
+  .extend({
+    siteId: z.string().min(1).optional(),
+  });
 
 export type Contact = z.infer<typeof contactSchema>;
 export type CreateContact = z.infer<typeof createContactSchema>;

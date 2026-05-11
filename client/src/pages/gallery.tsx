@@ -1,188 +1,218 @@
+import { useMemo, useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Heart, X } from "lucide-react";
-import { useState } from "react";
+import { ScrollFade } from "@/components/scroll-fade";
+import { Heart, X, ChevronLeft, ChevronRight } from "lucide-react";
 import ConfettiBackground from "@/components/confetti-background";
 import ConfettiBurst from "@/components/confetti-burst";
 import NavigationBar from "@/components/navigation-bar";
 import Footer from "@/components/footer";
+import { useWeddingSite } from "@/context/site-context";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { cn } from "@/lib/utils";
 
 export default function Gallery() {
-  const [selectedPhoto, setSelectedPhoto] = useState<{ src: string; alt: string } | null>(null);
+  const ws = useWeddingSite();
+  const reducedMotion = useReducedMotion();
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const galleryPhotos = [
-    {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776310781/lv_0_20260415184705_tqnujf.jpg",
-      alt: "Mymee in traditional attire"
-    },
-    {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776227687/DSC_8756_bbieof.jpg",
-      alt: "David in traditional attire"
-    },
-    {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776227680/DSC_8775_ta3pbs.jpg",
-      alt: "Mymee and David together"
-    },
-    {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776310778/lv_0_20260415190505_b0r0d4.jpg",
-      alt: "Couple portrait"
-    },
-    {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776227664/DSC_8782_bqdxop.jpg",
-      alt: "Mymee smiling"
-    },
-    {
-      src: "https://res.cloudinary.com/dycukxm7r/image/upload/v1776227671/PreweddingPictures_odczgq.jpg",
-      alt: "Pre-wedding pictures"
-    }
-  ];
+  const galleryPhotos = useMemo(() => {
+    const urls = ws.site?.content?.galleryImageUrls?.filter(Boolean) ?? [];
+    const label =
+      ws.site?.content?.coupleDisplayName ||
+      [ws.site?.partnerOneName, ws.site?.partnerTwoName].filter(Boolean).join(" & ") ||
+      "Wedding gallery";
+    return urls.map((src, i) => ({ src, alt: `${label} — photo ${i + 1}` }));
+  }, [ws.site]);
+
+  const selectedPhoto = selectedIndex !== null ? galleryPhotos[selectedIndex] ?? null : null;
+
+  const closeLightbox = useCallback(() => setSelectedIndex(null), []);
+  const goPrev = useCallback(() => {
+    setSelectedIndex((i) => {
+      if (i === null || galleryPhotos.length === 0) return null;
+      return (i - 1 + galleryPhotos.length) % galleryPhotos.length;
+    });
+  }, [galleryPhotos.length]);
+  const goNext = useCallback(() => {
+    setSelectedIndex((i) => {
+      if (i === null || galleryPhotos.length === 0) return null;
+      return (i + 1) % galleryPhotos.length;
+    });
+  }, [galleryPhotos.length]);
+
+  useEffect(() => {
+    if (selectedIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") goPrev();
+      if (e.key === "ArrowRight") goNext();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [selectedIndex, closeLightbox, goPrev, goNext]);
+
+  const coupleLine =
+    ws.site?.content?.coupleDisplayName ||
+    [ws.site?.partnerOneName, ws.site?.partnerTwoName].filter(Boolean).join(" & ") ||
+    "";
+
+  const closingLine =
+    ws.site?.tagline?.trim() ||
+    "Moments from our journey—thank you for being part of the story.";
 
   return (
-    <div className="min-h-screen bg-rose-50 relative">
+    <div className="min-h-screen bg-[var(--w-bg)] relative">
       <ConfettiBackground />
       <ConfettiBurst />
-      
+
       <NavigationBar currentPage="gallery" />
 
-      <div className="container mx-auto px-4 py-12">
-        {/* Hero Section */}
-        <motion.div 
-          className="text-center mb-16 relative"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1 className="text-4xl sm:text-6xl md:text-8xl font-script text-[hsl(342,69%,29%)] mb-8">
-            Gallery
-          </h1>
+      <header className="relative overflow-hidden border-b border-[var(--w-border-soft)] bg-[color-mix(in_srgb,var(--w-bg)_88%,white)] px-4 py-14 md:py-20">
+        <div className="pointer-events-none absolute -right-16 top-1/2 h-64 w-64 -translate-y-1/2 rounded-full bg-[var(--w-accent)]/15 blur-3xl" />
+        <div className="pointer-events-none absolute -left-20 top-0 h-48 w-48 rounded-full bg-[var(--w-primary)]/10 blur-2xl" />
+        <ScrollFade className="relative mx-auto max-w-3xl text-center" y={20} duration={0.68}>
+          <p className="text-[10px] font-medium uppercase tracking-[0.4em] text-[var(--w-primary)]">Gallery</p>
+          <h1 className="mt-3 font-serif text-4xl text-[var(--w-primary)] sm:text-5xl md:text-6xl">{coupleLine || "Our gallery"}</h1>
+          {ws.site?.weddingDate ? (
+            <p className="mt-4 font-serif text-lg text-gray-600 md:text-xl">
+              {new Date(ws.site.weddingDate).toLocaleDateString(undefined, {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </p>
+          ) : null}
+        </ScrollFade>
+      </header>
 
-          {/* Decorative elements positioned absolutely on the text */}
-            <motion.div 
-            className="absolute -top-4 -left-8 w-16 h-16 flex items-center justify-center"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            >
-              ❤️
-            </motion.div>
-            <motion.div 
-            className="absolute top-1/2 right-1/4 w-16 h-16 flex items-center justify-center transform -translate-y-1/2"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            >
-              🌸
-            </motion.div>
-            <motion.div 
-            className="absolute -bottom-4 -right-8 w-16 h-16 flex items-center justify-center"
-              animate={{ rotate: -360 }}
-              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            >
-              ❤️
-            </motion.div>
-        </motion.div>
+      <div className="container mx-auto px-4 py-12 md:py-16">
+        {galleryPhotos.length === 0 ? (
+          <p className="mx-auto max-w-lg py-16 text-center text-gray-600">
+            No gallery photos yet. Upload images in <strong>Admin → Setup</strong> (Photos step).
+          </p>
+        ) : (
+          <>
+            <p className="mx-auto mb-10 max-w-xl text-center text-sm text-gray-600 md:mb-12">
+              Tap any image to open a large view. Use arrow keys or the side buttons to move between photos.
+            </p>
+            <div className="columns-1 gap-4 sm:columns-2 lg:columns-3 [&>div]:mb-4">
+              {galleryPhotos.map((photo, index) => {
+                const tall = index % 5 === 0 || index % 7 === 3;
+                return (
+                  <motion.div
+                    key={photo.src}
+                    className={cn(
+                      "break-inside-avoid overflow-hidden rounded-xl bg-white/60 shadow-md ring-1 ring-black/5 cursor-pointer",
+                      tall && "sm:mb-2"
+                    )}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`Open photo: ${photo.alt}`}
+                    onClick={() => setSelectedIndex(index)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setSelectedIndex(index);
+                      }
+                    }}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false, margin: "-40px" }}
+                    transition={{ duration: reducedMotion ? 0 : 0.4, delay: reducedMotion ? 0 : (index % 12) * 0.03 }}
+                    whileHover={reducedMotion ? undefined : { y: -2 }}
+                  >
+                    <div className={cn("relative w-full overflow-hidden", tall ? "min-h-[18rem] md:min-h-[22rem]" : "min-h-[12rem] md:min-h-[14rem]")}>
+                      <img
+                        src={photo.src}
+                        alt={photo.alt}
+                        loading="lazy"
+                        className="h-full w-full object-cover object-center transition duration-500 hover:scale-[1.02] motion-reduce:transition-none motion-reduce:hover:scale-100"
+                      />
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </>
+        )}
 
-        {/* Gallery Grid */}
-        <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 max-w-7xl mx-auto items-start"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-          {galleryPhotos.map((photo, index) => (
-            <motion.div
-              key={index}
-              className={`
-                overflow-hidden rounded-xl shadow-lg group cursor-pointer
-                ${index === 0 ? 'col-span-1 sm:col-span-2 row-span-2' : ''}
-                ${index === 2 ? 'sm:col-span-1 lg:col-span-2' : ''}
-              `}
-              onClick={() => setSelectedPhoto(photo)}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault();
-                  setSelectedPhoto(photo);
-                }
-              }}
-              role="button"
-              tabIndex={0}
-              aria-label={`Open photo: ${photo.alt}`}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.02 }}
-            >
-              <img 
-                src={photo.src}
-                alt={photo.alt}
-                className={`
-                  w-full object-cover object-top group-hover:scale-105 transition-transform duration-500
-                  ${index === 0 ? 'h-96 sm:h-full' : 'h-48 sm:h-64'}
-                `}
-              />
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Bottom Action */}
-        <motion.div 
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-[hsl(342,69%,29%)] rounded-full flex items-center justify-center">
-              <Heart className="text-white text-2xl fill-current" />
+        <ScrollFade className="mx-auto mt-16 max-w-2xl text-center md:mt-20" y={22} duration={0.65}>
+          <div className="mb-4 flex justify-center">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[var(--w-primary)] shadow-lg">
+              <Heart className="h-7 w-7 fill-current text-white" aria-hidden />
             </div>
           </div>
-          <h3 className="text-2xl font-serif text-[hsl(342,69%,29%)] mb-4">
-            Love in Every Frame
-          </h3>
-          <p className="text-gray-700 leading-relaxed max-w-2xl mx-auto">
-            These moments capture the journey of our love story. Each photo tells a piece of our tale, 
-            from sweet beginnings to this beautiful celebration we're about to share with you.
-          </p>
-        </motion.div>
+          <h3 className="font-serif text-2xl text-[var(--w-primary)] md:text-3xl">Love in every frame</h3>
+          <p className="mt-4 leading-relaxed text-gray-700">{closingLine}</p>
+        </ScrollFade>
       </div>
 
-      {selectedPhoto && (
+      {selectedPhoto && selectedIndex !== null ? (
         <motion.div
-          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
           <button
             type="button"
-            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-            onClick={() => setSelectedPhoto(null)}
-            aria-label="Close image preview"
+            className="absolute inset-0 bg-black/85 backdrop-blur-sm"
+            onClick={closeLightbox}
+            aria-label="Close gallery"
           />
 
           <motion.div
-            className="relative z-10 w-full max-w-6xl rounded-lg bg-white p-2 shadow-2xl"
-            initial={{ scale: 0.95, opacity: 0 }}
+            className="relative z-10 w-full max-w-5xl rounded-xl bg-black/40 p-2 shadow-2xl ring-1 ring-white/10"
+            initial={{ scale: 0.96, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: reducedMotion ? 0 : 0.2 }}
           >
             <button
               type="button"
-              onClick={() => setSelectedPhoto(null)}
-              className="absolute right-3 top-3 rounded-full bg-black/60 p-2 text-white hover:bg-black/80"
-              aria-label="Close modal"
+              onClick={closeLightbox}
+              className="absolute right-2 top-2 z-20 rounded-full bg-black/70 p-2 text-white hover:bg-black/90 sm:right-3 sm:top-3"
+              aria-label="Close"
             >
               <X className="h-5 w-5" />
             </button>
-
+            {galleryPhotos.length > 1 ? (
+              <>
+                <button
+                  type="button"
+                  className="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/70 p-2 text-white hover:bg-black/90 sm:left-3"
+                  aria-label="Previous photo"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goPrev();
+                  }}
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+                <button
+                  type="button"
+                  className="absolute right-2 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/70 p-2 text-white hover:bg-black/90 sm:right-14"
+                  aria-label="Next photo"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goNext();
+                  }}
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+              </>
+            ) : null}
             <img
               src={selectedPhoto.src}
               alt={selectedPhoto.alt}
-              className="h-[80vh] w-full rounded-md object-contain"
+              className="max-h-[min(82vh,48rem)] w-full rounded-lg object-contain"
             />
+            <p className="mt-2 text-center text-xs text-white/70">
+              {selectedIndex + 1} / {galleryPhotos.length}
+            </p>
           </motion.div>
         </motion.div>
-      )}
-      
+      ) : null}
+
       <Footer />
     </div>
   );

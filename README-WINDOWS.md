@@ -65,12 +65,10 @@ npm run setup:windows
 ### Step 5: Start Development
 
 ```cmd
-# With database seeding
 npm run dev
-
-# Without seeding (if connection issues)
-npm run dev:clean
 ```
+
+Then open `/admin/setup` to create your site. Use `npm run dev:clean` only if you rely on that script name; it runs the same server as `dev`.
 
 ## Common Windows Issues & Solutions
 
@@ -105,7 +103,7 @@ npm run dev:clean
 # Start development server
 npm run dev
 
-# Start without database seeding
+# Alias of dev (same behavior)
 npm run dev:clean
 
 # Build for production
@@ -116,9 +114,6 @@ npm run start
 
 # Type checking
 npm run check
-
-# Seed database only
-npm run db:seed
 
 # Windows setup check
 npm run setup:windows

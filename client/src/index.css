@@ -30,6 +30,13 @@
   --rose: hsl(332, 51%, 70%);
   --rose-light: hsl(345, 100%, 98%);
   --rose-dark: hsl(332, 60%, 50%);
+
+  /* Tenant wedding palette (overridden on /w/:slug when site loads) */
+  --w-primary: #800000;
+  --w-accent: hsl(332, 51%, 70%);
+  --w-bg: #fff1f2;
+  --w-primary-hover: #5c0000;
+  --w-border-soft: #fce7f3;
 }
 
 .dark {
@@ -83,10 +90,10 @@
   .stripe-pattern {
     background: repeating-linear-gradient(
       90deg,
-      hsl(342, 60%, 40%) 0px,
-      hsl(342, 60%, 40%) 20px,
-      hsl(342, 69%, 29%) 20px,
-      hsl(342, 69%, 29%) 40px
+      var(--w-primary-hover) 0px,
+      var(--w-primary-hover) 20px,
+      var(--w-primary) 20px,
+      var(--w-primary) 40px
     );
     height: 20px;
   }
@@ -114,9 +121,10 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
+  /* One full strip is duplicated; move exactly half the row width for a seamless loop. */
   @keyframes scroll {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
+    100% { transform: translateX(-50%); }
   }
 
   .animate-confetti {
@@ -132,12 +140,30 @@
   }
 
   .animate-scroll {
-    animation: scroll 18s linear infinite;
+    animation: scroll 72s linear infinite;
   }
 
   @media (max-width: 768px) {
     .animate-scroll {
-      animation: scroll 18s linear infinite !important;
+      animation: scroll 72s linear infinite !important;
+    }
+  }
+
+  @keyframes ken-burns-subtle {
+    0% { transform: scale(1) translate3d(0, 0, 0); }
+    100% { transform: scale(1.08) translate3d(-1%, -0.5%, 0); }
+  }
+
+  .animate-ken-burns {
+    animation: ken-burns-subtle 28s ease-in-out infinite alternate;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-scroll {
+      animation: none !important;
+    }
+    .animate-ken-burns {
+      animation: none !important;
     }
   }
 }

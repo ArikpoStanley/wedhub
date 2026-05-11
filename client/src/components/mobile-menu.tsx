@@ -31,7 +31,7 @@ export default function MobileMenu({ isOpen, onClose, navigationItems, onNavigat
           
           {/* Menu Panel */}
           <motion.div
-            className="absolute inset-0 bg-rose-50"
+            className="absolute inset-0 bg-[color-mix(in_srgb,var(--w-bg)_92%,var(--w-primary))]"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
@@ -47,11 +47,11 @@ export default function MobileMenu({ isOpen, onClose, navigationItems, onNavigat
               }}
             />
             
-            <div className="relative h-full flex flex-col justify-center items-end pr-8 space-y-4 text-[hsl(342,69%,29%)]">
+            <div className="relative h-full flex flex-col justify-center items-end pr-8 space-y-4 text-[var(--w-primary)]">
               <Button
                 variant="ghost"
                 size="icon"
-                className="absolute top-6 right-6 text-3xl text-[hsl(342,69%,29%)] hover:text-[hsl(342,60%,40%)]"
+                className="absolute top-6 right-6 text-3xl text-[var(--w-primary)] hover:text-[var(--w-primary-hover)]"
                 onClick={onClose}
               >
                 <X className="h-8 w-8" />
@@ -62,7 +62,7 @@ export default function MobileMenu({ isOpen, onClose, navigationItems, onNavigat
                   <motion.button
                     key={item.href}
                     onClick={() => onNavigate(item.href)}
-                    className="block text-2xl font-serif font-semibold hover:text-[hsl(342,60%,40%)] transition-colors text-right"
+                    className="block text-2xl font-serif font-semibold hover:text-[var(--w-primary-hover)] transition-colors text-right"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}

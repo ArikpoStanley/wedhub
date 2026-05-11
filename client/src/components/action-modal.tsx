@@ -1,59 +1,94 @@
 import { motion } from "framer-motion";
 import { MapPin, Calendar, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  buildGoogleCalendarUrl,
+  defaultCalendarWindowFromWeddingDate,
+  parseIsoDateTime,
+} from "@/lib/google-calendar";
+
+export type WeddingActionLinks = {
+  mapsDirectionsUrl?: string;
+  calendarGoogleUrlOverride?: string;
+  calendarEventTitle?: string;
+  calendarEventDescription?: string;
+  calendarEventLocation?: string;
+  calendarStartIso?: string;
+  calendarEndIso?: string;
+  weddingDate: Date | null;
+  orderOfServiceUrl?: string;
+};
 
 interface ActionModalProps {
   isOpen: boolean;
   onClose: () => void;
   onItemClicked?: () => void;
+  links: WeddingActionLinks;
 }
 
-export default function ActionModal({ isOpen, onClose, onItemClicked }: ActionModalProps) {
+export default function ActionModal({ isOpen, onClose, onItemClicked, links }: ActionModalProps) {
+  const openDirections = () => {
+    const u = links.mapsDirectionsUrl?.trim();
+    if (u) window.open(u, "_blank", "noopener,noreferrer");
+    else window.alert("Add a “Get directions” Maps URL in Admin → Setup (Schedule & quick links).");
+    onClose();
+    onItemClicked?.();
+  };
+
+  const openCalendar = () => {
+    const override = links.calendarGoogleUrlOverride?.trim();
+    if (override) {
+      window.open(override, "_blank", "noopener,noreferrer");
+      onClose();
+      onItemClicked?.();
+      return;
+    }
+    const title = links.calendarEventTitle?.trim() || "Wedding";
+    const details = links.calendarEventDescription?.trim() || "";
+    const location = links.calendarEventLocation?.trim() || "";
+    let start = parseIsoDateTime(links.calendarStartIso);
+    let end = parseIsoDateTime(links.calendarEndIso);
+    if (!start || !end) {
+      const win = defaultCalendarWindowFromWeddingDate(links.weddingDate);
+      if (win) {
+        start = start ?? win.start;
+        end = end ?? win.end;
+      }
+    }
+    if (!start || !end) {
+      window.alert(
+        "Set event start/end (Schedule & quick links) or add a full Google Calendar URL override.",
+      );
+      onClose();
+      onItemClicked?.();
+      return;
+    }
+    const url = buildGoogleCalendarUrl({ title, details, location, start, end });
+    window.open(url, "_blank", "noopener,noreferrer");
+    onClose();
+    onItemClicked?.();
+  };
+
+  const openOrderOfService = () => {
+    const u = links.orderOfServiceUrl?.trim();
+    if (u) window.open(u, "_blank", "noopener,noreferrer");
+    else window.alert("Add an order-of-service / PDF URL in Admin → Setup (Schedule & quick links).");
+    onClose();
+    onItemClicked?.();
+  };
 
   const actions = [
-    {
-      icon: <MapPin className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />,
-      text: "Get Direction",
-      onClick: () => {
-        // Open Google Maps place link in new tab
-        const googleMapsUrl = "https://www.google.com/maps/place/Ikot+Obioko+534104,+Akwa+Ibom/@4.6879162,7.6929476,16z/data=!3m1!4b1!4m6!3m5!1s0x10680caa7fd78e0f:0xa9de125d2d80a7cc!8m2!3d4.6859971!4d7.6961914!16s%2Fg%2F11rc00klcd?entry=ttu&g_ep=EgoyMDI2MDQxMi4wIKXMDSoASAFQAw%3D%3D";
-        window.open(googleMapsUrl, '_blank');
-        onClose();
-        onItemClicked?.();
-      }
-    },
+    { icon: <MapPin className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />, text: "Get Direction", onClick: openDirections },
     {
       icon: <Calendar className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />,
       text: "Add to Google Calendar",
-      onClick: () => {
-        // Create Google Calendar event URL
-        const eventDetails = {
-          text: "Wedding Ceremony & Reception",
-          dates: "20241228T140000Z/20241228T220000Z", // December 28, 2024, 2:00 PM - 10:00 PM UTC
-          details: "Join us for our special day! Wedding ceremony and reception at Aquila Events Hub, Ikorodu, Lagos State, Nigeria.",
-          location: "Aquila Events Hub, Ikorodu, Lagos State, Nigeria"
-        };
-
-        const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventDetails.text)}&dates=${eventDetails.dates}&details=${encodeURIComponent(eventDetails.details)}&location=${encodeURIComponent(eventDetails.location)}`;
-
-        window.open(googleCalendarUrl, '_blank');
-        onClose();
-        onItemClicked?.();
-      }
+      onClick: openCalendar,
     },
     {
       icon: <Download className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />,
       text: "Download Order of Service",
-      onClick: () => {
-        // Open Order of Service hosted on Cloudinary
-        const orderOfServiceUrl =
-          "https://asset.cloudinary.com/dycukxm7r/891079a32bd9d4ec2ac010aa27b48260";
-        window.open(orderOfServiceUrl, "_blank");
-
-        onClose();
-        onItemClicked?.();
-      }
-    }
+      onClick: openOrderOfService,
+    },
   ];
 
   return (
@@ -64,15 +99,10 @@ export default function ActionModal({ isOpen, onClose, onItemClicked }: ActionMo
         animate={{ opacity: isOpen ? 1 : 0 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
-        style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
+        style={{ pointerEvents: isOpen ? "auto" : "none" }}
       >
-        {/* Backdrop */}
-        <div
-          // className="fixed inset-0 bg-black/20 backdrop-blur-sm"
-          onClick={onClose}
-        />
+        <div onClick={onClose} />
 
-        {/* Modal Content */}
         <motion.div
           className="relative z-10 bg-white rounded-2xl sm:rounded-3xl shadow-xl w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg overflow-hidden"
           initial={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -80,13 +110,12 @@ export default function ActionModal({ isOpen, onClose, onItemClicked }: ActionMo
           exit={{ scale: 0.9, opacity: 0, y: 20 }}
           transition={{ duration: 0.2 }}
         >
-          {/* Modal body with buttons */}
           <div className="p-4 sm:p-5 md:p-6 space-y-3 sm:space-y-4">
             {actions.map((action, index) => (
               <Button
                 key={index}
                 variant="ghost"
-                className="w-full justify-center gap-2 sm:gap-3 h-12 sm:h-14 md:h-16 rounded-xl font-medium transition-colors bg-[#800000] text-white hover:bg-pink-100 hover:text-[#800000] text-sm sm:text-base md:text-lg"
+                className="w-full justify-center gap-2 sm:gap-3 h-12 sm:h-14 md:h-16 rounded-xl font-medium transition-colors bg-[var(--w-primary)] text-white hover:bg-[var(--w-border-soft)] hover:text-[var(--w-primary)] text-sm sm:text-base md:text-lg"
                 onClick={action.onClick}
               >
                 <span className="flex-shrink-0">{action.icon}</span>
@@ -98,4 +127,4 @@ export default function ActionModal({ isOpen, onClose, onItemClicked }: ActionMo
       </motion.div>
     </>
   );
-} 
+}

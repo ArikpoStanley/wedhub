@@ -12,7 +12,6 @@ call npm run setup:windows
 
 echo.
 echo Setup complete! You can now run:
-echo   npm run dev        (with database seeding)
-echo   npm run dev:clean  (without database seeding)
+echo   npm run dev        (start app — configure sites in Admin / Setup)
 echo.
 pause

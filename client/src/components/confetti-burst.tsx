@@ -1,32 +1,16 @@
 import { useEffect } from "react";
 import confetti from "canvas-confetti";
+import { weddingEffectColors } from "@/lib/effect-palette";
 
 export default function ConfettiBurst() {
   useEffect(() => {
-    // Create a colorful confetti burst
     const fireConfetti = () => {
-      // Multiple bursts for a more dramatic effect
+      const colors = weddingEffectColors();
       confetti({
         particleCount: 100,
         spread: 70,
         origin: { y: 0.6 },
-        colors: [
-          '#f472b6', // pink
-          '#ec4899', // rose
-          '#db2777', // magenta
-          '#be185d', // dark pink
-          '#fbbf24', // amber
-          '#f59e0b', // orange
-          '#10b981', // emerald
-          '#059669', // green
-          '#3b82f6', // blue
-          '#1d4ed8', // dark blue
-          '#8b5cf6', // violet
-          '#7c3aed', // purple
-          '#ef4444', // red
-          '#dc2626', // dark red
-          '#ffffff', // white
-        ],
+        colors,
         shapes: ['circle', 'square'],
         gravity: 0.8,
         ticks: 200,
@@ -41,27 +25,18 @@ export default function ConfettiBurst() {
           angle: 60,
           spread: 55,
           origin: { x: 0 },
-          colors: [
-            '#f472b6', '#ec4899', '#db2777', '#be185d', '#fbbf24',
-            '#f59e0b', '#10b981', '#059669', '#3b82f6', '#1d4ed8',
-            '#8b5cf6', '#7c3aed', '#ef4444', '#dc2626', '#ffffff',
-          ],
+          colors,
         });
       }, 250);
 
-      // Third burst from the right side
       setTimeout(() => {
         confetti({
           particleCount: 50,
           angle: 120,
           spread: 55,
           origin: { x: 1 },
-          colors: [
-            '#f472b6', '#ec4899', '#db2777', '#be185d', '#fbbf24',
-            '#f59e0b', '#10b981', '#059669', '#3b82f6', '#1d4ed8',
-            '#8b5cf6', '#7c3aed', '#ef4444', '#dc2626', '#ffffff',
-          ],
-      });
+          colors,
+        });
       }, 400);
     };
 
