@@ -1,0 +1,18 @@
+1:"$Sreact.fragment"
+2:I[1484,["9779","static/chunks/9779-a7d5ee37171640e5.js","3082","static/chunks/3082-f1871215abc832eb.js","7177","static/chunks/app/layout-dbb2b4d64b0fb2ca.js"],"Providers"]
+3:I[9766,[],""]
+4:I[8924,[],""]
+5:I[1455,["9779","static/chunks/9779-a7d5ee37171640e5.js","4345","static/chunks/app/not-found-d8991b53c8a4e95d.js"],"default"]
+6:I[4431,[],"OutletBoundary"]
+8:I[5278,[],"AsyncMetadataOutlet"]
+a:I[4431,[],"ViewportBoundary"]
+c:I[4431,[],"MetadataBoundary"]
+d:"$Sreact.suspense"
+f:I[7150,[],""]
+:HL["/_next/static/css/6f2df1dd70effdcb.css","style"]
+0:{"P":null,"b":"_LKFmY94iURIDnAjhkHog","p":"","c":["","_not-found"],"i":false,"f":[[["",{"children":["/_not-found",{"children":["__PAGE__",{}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/6f2df1dd70effdcb.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","children":[["$","head",null,{"children":[["$","link",null,{"rel":"preconnect","href":"https://fonts.googleapis.com"}],["$","link",null,{"rel":"preconnect","href":"https://fonts.gstatic.com","crossOrigin":""}],["$","link",null,{"href":"https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap","rel":"stylesheet"}]]}],["$","body",null,{"children":["$","$L2",null,{"children":["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","$L5",null,{}],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}]]}]]}],{"children":["/_not-found",["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":[["$","$L5",null,{}],null,["$","$L6",null,{"children":["$L7",["$","$L8",null,{"promise":"$@9"}]]}]]}],{},null,false]},null,false]},null,false],["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],[["$","$La",null,{"children":"$Lb"}],null],["$","$Lc",null,{"children":["$","div",null,{"hidden":true,"children":["$","$d",null,{"fallback":null,"children":"$Le"}]}]}]]}],false]],"m":"$undefined","G":["$f",[]],"s":false,"S":true}
+b:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+7:null
+10:I[622,[],"IconMark"]
+9:{"metadata":[["$","title","0",{"children":"Mymee & David - Wedding Celebration | April 18th, 2026"}],["$","meta","1",{"name":"description","content":"Join Mymee & David as they celebrate their love on April 18th, 2026. A beautiful wedding celebration filled with love, faith, and gratitude."}],["$","link","2",{"rel":"icon","href":"https://res.cloudinary.com/dycukxm7r/image/upload/v1776229630/MD-removebg-preview_yz3rat.png"}],["$","link","3",{"rel":"apple-touch-icon","href":"https://res.cloudinary.com/dycukxm7r/image/upload/v1776229630/MD-removebg-preview_yz3rat.png"}],["$","$L10","4",{}]],"error":null,"digest":"$undefined"}
+e:"$9:metadata"
